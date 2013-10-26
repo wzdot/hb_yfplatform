@@ -1,0 +1,139 @@
+ul li {
+  list-style: none;
+}
+.clearfix {
+  *zoom: 1;
+  &:before,&:after {
+    display: table;
+    content: ""; 
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.bg_gradient {
+  background:#499996;
+  color:#fff;
+  padding:0 0 0 10px;
+  line-height:25px;
+  height:25px;
+  border-radius: 5px 5px 0 0;
+}
+
+body{
+  width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+  font-family:'微软雅黑','microsoft yahei','Apple LiGothic Medium','SimHei',Arial, Helvetica, sans-serif;
+  font-size:12px;
+  background-attachment: fixed; 
+}
+
+.navbar-ie6{
+  background: #98c2ba;
+  width: 100%;
+  .navbar-banner {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 1200px;
+    height: 90px;
+    margin: 0 auto;
+    padding: 0;  
+    background: url(/assets/version_10_7.png) no-repeat scroll 0 0;     
+  }
+}
+.navbar-container {   
+  height: 30px;
+  background: #499996;
+  width: 100%;
+  .nav-collapse {
+    width: 1200px;
+    padding: 0;
+    margin: 0 auto;
+    background: #499996;
+    .nav {
+      height: 30px;
+      margin: 0;
+      padding: 0; 
+      li { 
+        list-style: none;
+        position: relative;
+        top: 2px;
+        left: 0;
+        float:left;
+        margin: 0;
+        padding: 0;
+        a {
+          font-family: inherit;
+          font-size: inherit;
+          font-weight: bold;
+          text-decoration: none;
+          border-radius: 2px;
+          color: #444;
+          display: block;
+          _float:left;
+          height: 26px;
+          line-height: 26px;
+          padding: 0 10px;
+          .caret {
+            display: none;
+          }
+          &:hover {
+            background:#98c2ba;
+          }
+        }
+      }
+      li.active {
+        a {
+          background:#98c2ba;
+        }
+      }
+      li.dropdown {
+        z-index: 100;
+        div.dropdown-menu {
+          width: 70px;
+          height: 75px;           
+          position: absolute;                   
+          top: 28px;
+          left: 0;
+          display: none;
+          img {
+            position: absolute;  
+            top: 0;
+            left: 13px;
+            z-index: 150;  
+            height: 11px;
+            width: 18px;
+          }
+          ul.dropdown-menu {
+            border: 1px solid #ccc;
+            border-radius: 4px; 
+            width: 70px;
+            position: absolute;            
+            top: 10px; 
+            left: 0;
+            z-index: 100;             
+            padding: 0;
+            margin: 0;                          
+            background: #fff;
+            li {
+              float: none;
+              _float: left;
+              margin: 0 1px 4px 1px;
+              text-align: center;
+              a {
+                background:#fff;
+                &:hover {
+                  background:#98c2ba;  
+                }
+              }
+            }
+          }     
+        }                
+      }
+    }
+  }
+}

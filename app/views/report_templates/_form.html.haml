@@ -1,0 +1,34 @@
+= form_for @report_template, :multipart => true do |f|
+  -if @report_template.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@report_template.errors.count, "error")} prohibited this report_template from being saved:"
+      %ul
+        - @report_template.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :cover
+    = f.file_field :cover
+  .field
+    = f.label :order_by1
+    = f.text_field :order_by1
+  .field
+    = f.label :order_by2
+    = f.text_field :order_by2
+  .field
+    = f.label :order_by3
+    = f.text_field :order_by3
+  .field
+    = f.label :order_by4
+    = f.text_field :order_by4
+  .field
+    = f.label :order_by5
+    = f.text_field :order_by5
+  .field
+    = f.label :order_by6
+    = f.text_field :order_by6
+  .actions
+    = f.submit 'Save'

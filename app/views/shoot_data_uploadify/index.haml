@@ -1,0 +1,25 @@
+= stylesheet "application"
+= javascript "application"
+= stylesheet_last "referenced-uploadify", "page-shoot_data_uploadify"
+= javascript_last "jquery.uploadify-3.1.min", "shoot_data_uploadify"
+
+.upload_shoot_data
+	%input#file_upload{:name => "file_upload", :type => "file"}/
+.upload_control_btn
+	%input.btn#start_upload{:type => 'button', :"value" => "开始上传"} 	
+	%input.btn#stop_upload{:type => 'button', :"value" => "停止上传"} 
+	%input.btn#delete_all{:type => 'button', :"value" => "删除所有"} 
+.upload_count
+	%span#complete_count 0
+	\/
+	%span#total_count 0
+.upload_warning
+	%span 每次最多上传165张图片，图片数量过多时，请分批上传。
+.upload_rule
+	%label{:for => 'analyse_rule'} 诊断规则:
+	%select#analyse_rule
+		%option 国网规则
+		%option
+		%option
+.upload_box_title
+	%h2.bg_gradient 上传进度

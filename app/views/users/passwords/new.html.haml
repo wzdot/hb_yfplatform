@@ -1,0 +1,19 @@
+= stylesheet "application"
+= javascript "application"
+= stylesheet_last 'page-admin'
+= javascript_last "reset"
+
+%h2 找回密码
+.get_password_p
+  .div_nav.first_nav.active_nav 1. 输入邮箱地址
+  .div_nav ————>
+  .div_nav 2. 重置密码
+  .div_nav ————>
+  .div_nav 3. 完成
+= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }, :remote => true) do |f|
+  = f.error_notification
+  .inputs
+    = f.input :email, :required => true, :label => '电子邮件'
+    %span.w_message 请输入电子邮件
+  .actions
+    = f.button :submit, "发送邮件"

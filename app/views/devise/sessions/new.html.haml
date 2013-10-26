@@ -1,0 +1,13 @@
+= stylesheet_link_tag 'page-login'
+
+%h2 
+  = t 'app.devise.sign_in'
+= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+  .inputs
+    = f.input :email, :label => t( "app.devise.email" ), :required => false, :autofocus => true
+    = f.input :password, :label => t( "app.devise.password" ), :required => false
+    = f.input :remember_me, :label => t( "app.devise.remember_me" ), :as => :boolean if devise_mapping.rememberable?
+  .actions
+    = f.button :submit, t( "app.devise.sign_in" )
+
+= render "links"

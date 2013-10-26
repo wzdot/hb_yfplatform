@@ -1,0 +1,2 @@
+module FaultNaturesHelper
+end

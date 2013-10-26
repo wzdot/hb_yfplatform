@@ -1,0 +1,27 @@
+!!! 5
+%html
+  %head
+    = render 'layouts/head'
+  %body
+    - nav_menu = 'home_nav_menu'
+    = render 'layouts/navbar', :nav_menu => nav_menu
+    .container-fluid
+      .row-fluid
+        .span2
+          = render 'layouts/sidebar'
+
+        .span10.content
+          .notice
+            = notice
+          .alert
+            = alert
+          .main-content
+            = yield
+
+      %hr
+      %footer
+        %p.pull-right
+          &copy;
+          = "#{ t 'app.copyright' } 2012"
+
+= javascript_include_tag "application"

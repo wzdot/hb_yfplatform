@@ -1,0 +1,19 @@
+"zh-CN":
+  active_scaffold:
+    search: 查找
+    reset: 还原
+    create_new: 创建
+    create: 创建
+    edit: 编辑
+    delete: 删除
+    show: 显示
+    update: 保存
+    cancel: 放弃
+    close: 关闭
+    found: 笔数据
+    are_you_sure_to_delete: "你确定删除吗?"
+    create_voltage_level: "创建电压等级"
+    update_voltage_level: "编辑电压等级"
+    create_model: "创建"
+    update_model: "编辑"
+

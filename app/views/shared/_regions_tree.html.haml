@@ -1,0 +1,115 @@
+:javascript
+  var regions_tree_setting = {
+    async: {
+      enable: true,
+      url: get_url_for_regions_tree,
+      type: "get",
+      autoParam: [ "id", "name=n", "level=lv" ],
+      otherParam:{ "otherParam" : "regions_tree" }
+    },
+    edit: {
+      enable: false,
+      showRemoveBtn: false,
+      showRenameBtn: false
+    },
+    view: {
+      selectedMulti: false,
+      expandSpeed: ""
+    },
+
+    callback: {
+      beforeExpand: beforeExpand,
+      onAsyncSuccess: onAsyncSuccess,
+      onAsyncError: onAsyncError,
+      onClick: onRegionsTreeClick
+    }
+  };
+
+  function onRegionsTreeClick( event, treeId, treeNode, clickFlag ) {
+    if( treeNode && treeNode.level < 4 ) { return; }
+
+    //更新拍摄顺序明细
+    var obj_shoot_sequences_tree = $.fn.zTree.getZTreeObj( "shoot_sequences_tree" );
+    obj_shoot_sequences_tree.reAsyncChildNodes( null, "refresh", false );
+
+    var obj_device_areas_to_select = $.fn.zTree.getZTreeObj( "device_areas_to_select_tree" );
+    obj_device_areas_to_select.reAsyncChildNodes( null, "refresh", false );
+    
+    $( "#btn_save_shoot_sequence" ).attr( "disabled", true );
+
+    $( "#btn_download_task_pkg" ).attr( "disabled", false );
+
+    var shoot_sequence_id = get_cur_shoot_sequence_id();
+    var url = "#"
+    if( shoot_sequence_id ) { url = "/task/shoot_sequences/download_task_pkg/" + shoot_sequence_id; }
+    $( "#btn_download_task_pkg" ).attr( "href", url );
+  }
+
+  function get_url_for_regions_tree( treeId, treeNode ) {
+    var level;
+    if( !treeNode ) { 
+      level = -1; 
+    } else {
+      level = treeNode.level;
+    }
+    //alert( "getUrl treeId:" + treeId + " treeNode:" + treeNode + " level: " + level );
+    var param;
+    if( treeNode ) {
+      param  = treeNode.id; }
+    else {
+      param = 0;
+    }
+
+    //到level2，则获取其下的变电站或线路
+    if( level == 2 ) {
+      return "/basic_data/regions/" + param + "/get_substations.json?level=" + level;
+    } else if( level == 3 ) {  //到level3，则获取其下的拍摄顺序定义
+      return "/basic_data/substations/" + param + "/get_shoot_sequences.json?level=" + level;
+    } else {
+      return "/basic_data/regions/" + param + "/get_childs.json?level=" + level;
+    }
+  }
+
+  function beforeExpand( treeId, treeNode ) {
+    //alert( "beforeExpand" );
+    if( !treeNode.isAjaxing ) {
+      ajaxGetNodes( treeNode, "refresh" );
+      return true;
+    } else {
+      alert( "zTree 正在下载数据中，请稍后展开节点。。。" );
+      return false;
+    }
+  }
+
+  function onAsyncSuccess( event, treeId, treeNode, msg ) {
+    if( !msg || msg.length == 0 ) {
+      return;
+    }
+    //alert( "treeId: " + treeId );
+
+    var zTree = $.fn.zTree.getZTreeObj( treeId );
+    if( treeNode ) {
+      treeNode.icon = "";
+      zTree.updateNode( treeNode );
+      zTree.selectNode( treeNode.children[ 0 ] );
+    }
+    //zTree.expandAll( true );
+  }
+
+  function onAsyncError( event, treeId, treeNode, XMLHttpRequest, textStatus, errorThrown ) {
+    var zTree = $.fn.zTree.getZTreeObj( treeId );
+    alert("异步获取数据出现异常。");
+    treeNode.icon = "";
+    zTree.updateNode( treeNode );
+  }
+
+  function ajaxGetNodes( treeNode, reloadType ) {
+    var zTree = $.fn.zTree.getZTreeObj( "regions_tree" );
+    if( reloadType == "refresh" ) {
+      treeNode.icon = "#{ asset_path( 'loading.gif' ) }";
+      zTree.updateNode( treeNode );
+    }
+    zTree.reAsyncChildNodes( treeNode, reloadType, true );
+  }
+
+

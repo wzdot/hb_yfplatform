@@ -1,0 +1,22 @@
+!!!
+%html
+  %head
+    = render 'layouts/head'
+  %body
+    - nav_menu = 'home_nav_menu'
+    = render 'layouts/navbar', :nav_menu => nav_menu
+    .container-fluid
+      .row-fluid
+        .span2          
+
+        .span10.content
+          .notice
+            = notice
+          .main-content
+            = yield
+
+    = render 'layouts/foot'
+
+/ = yield :javascript
+/ = yield :last
+

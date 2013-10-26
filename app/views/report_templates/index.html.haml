@@ -1,0 +1,31 @@
+%h1 Listing report_templates
+
+%table
+  %tr
+    %th Name
+    %th Order by1
+    %th Order by2
+    %th Order by3
+    %th Order by4
+    %th Order by5
+    %th Order by6
+    %th
+    %th
+    %th
+
+  - @report_templates.each do |report_template|
+    %tr
+      %td= report_template.name
+      %td= report_template.order_by1
+      %td= report_template.order_by2
+      %td= report_template.order_by3
+      %td= report_template.order_by4
+      %td= report_template.order_by5
+      %td= report_template.order_by6
+      %td= link_to 'Show', report_template
+      %td= link_to 'Edit', edit_report_template_path(report_template)
+      %td= link_to 'Destroy', report_template, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Report template', new_report_template_path

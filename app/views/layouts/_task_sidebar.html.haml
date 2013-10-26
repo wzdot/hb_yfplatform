@@ -1,0 +1,14 @@
+.well.sidebar-nav
+  %ul.nav.nav-list
+    %li.nav-header.bg_gradient
+      = t( "app.shoot_sequence" )
+    %li
+      = link_to t( "app.shoot_sequences_index" ), shoot_sequences_path
+    %li
+      = link_to t( "app.define_dashboard" ), shoot_sequences_define_dashboard_path
+    %li
+      = link_to t( "app.device_area_shoot_sequence" ), device_area_shoot_sequences_path
+    %li
+      = link_to t( "app.device_shoot_sequence" ), device_shoot_sequences_path
+    %li
+      = link_to t( "app.part_position_shoot_sequence" ), part_position_shoot_sequences_path

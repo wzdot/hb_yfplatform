@@ -1,0 +1,65 @@
+
+.row-fluid.wraper.clearfix
+  .span2.nav_left
+    %p.bg_gradient 查询目录
+    %ul#treeDemo.ztree
+  .span10
+    .query_box
+      %p.bg_gradient 查询
+      %form{:action => "", :method => ""}
+        %label{:for => "device_type"} 设备类型：
+        %select#device_type
+          %option 设备类型列表
+        %label{:for => "voltage_level"} 电压等级：
+        %select#voltage_level
+          %option 电压等级列表
+        %label{:for => "begin_time"} 日期：
+        %select#begin_time
+          %option 起始日期
+        %label{:for => "begin_time"} 至
+        %select#begin_time
+          %option 截止日期
+        .two_btn
+          %input.btn{:type => "submit", :value => "查找"}/
+          %input.btn{:type => "reset", :value => "清空"}/
+    .query_defect_box
+      %p.bg_gradient 缺陷查询
+      %form{:action => "", :method => ""}
+        .query_defect
+          %input#level_danger{:type => "checkbox"}/
+          %label{:for => "level_danger"} 危急缺陷
+          %span (3)
+        .query_defect
+          %input#level_serioue{:type => "checkbox"}/
+          %label{:for => "level_serioue"} 严重缺陷
+          %span (12)
+        .query_defect
+          %input#level_common{:type => "checkbox"}/
+          %label{:for => "level_common"} 一般缺陷
+          %span (12)
+        .query_defect
+          %input#level_attention{:type => "checkbox"}/
+          %label{:for => "level_attention"} 关注
+          %span (12)
+        .query_defect
+          %input#level_normal{:type => "checkbox"}/
+          %label{:for => "level_normal"} 正常
+          %span (2583)
+        %span.query_defect_total
+          合计：
+          %em 2622
+        .two_btn
+          %input.btn{:type => "button", :value => "批量缺陷诊断"}/
+          %input.btn{:type => "button", :value => "编辑"}/
+        .upload_visiblelight
+          %input.upload_button_two{:type => "button", :value => "导入可见光"}/
+          %input.upload_file_two{:type => "file"}/
+        .upload_result
+          %input.upload_button_one{:type => "button", :value => "导入拍摄结果"}/
+          %input.upload_file_one{:type => "file"}/
+    / query-results part
+    #tabs.query_results
+      %ul
+/ upload-picturelist part
+.span12
+  %p.bg_gradient 导入图片列表

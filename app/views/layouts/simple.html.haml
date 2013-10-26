@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    = render "layouts/head"
+  %body
+    .container-fluid
+      .row-fluid
+        .span12.content
+          /
+            - flash.each do |key, msg|
+              = content_tag :div, msg, :class => "#{key}"
+          .main-content
+            = yield
+
+      %hr
+
+= yield :stylesheet_last
+= yield :javascript_last

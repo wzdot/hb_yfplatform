@@ -1,0 +1,17 @@
+:javascript
+  var browserName=navigator.appName;
+  if (browserName=="Netscape") { 
+    function closeme() { 
+      window.open('','_self',''); 
+      window.close(); 
+    } 
+  } else { 
+    if (browserName=="Microsoft Internet Explorer") { 
+      function closynoshowsme() { 
+        window.opener = "whocares"; 
+        window.close(); 
+      } 
+    } 
+  }
+  alert('登录超时，请重新进入！')
+  closeme()

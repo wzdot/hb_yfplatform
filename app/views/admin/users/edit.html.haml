@@ -1,0 +1,45 @@
+= stylesheet 'application'
+= javascript 'application'
+= javascript_last 'admin_ztree'    
+= stylesheet_last 'page-admin'
+%h2.bg_gradient= @admin_user.name
+.admin_user_level
+  = @admin_user.item_id
+.user_new
+  = form_for [:admin, @admin_user] do |f|
+    .row
+      .span8
+        .clearfix
+          = f.label :name
+          .input
+            = f.text_field :name
+        .clearfix
+          = f.label :email
+          .input
+            = f.text_field :email, :disabled => true
+        .clearfix
+          = f.label :password
+          .input= f.password_field :password
+        .clearfix
+          = f.label :password_confirmation
+          .input= f.password_field :password_confirmation
+        .clearfix
+          = f.label :mobile
+          .input
+            = f.text_field :mobile
+        .clearfix
+          %label{:for => 'admin_flag'} 管理员
+          .input
+            - if current_user.id == @admin_user.id
+              %input#admin_flag{:type => 'checkbox', :name => 'admin', :checked => @admin_user.admin?, :disabled => true}
+            - else
+              %input#admin_flag{:type => 'checkbox', :name => 'admin', :checked => @admin_user.admin?}
+      .span4
+        %h2.bg_gradient 区域权限
+        %ul#roleTree.ztree
+    .actions
+      = f.submit '保存', :class => "btn edit_user"
+      - if @admin_user.new_record?
+        = link_to '取消', admin_users_path, :class => "btn"
+      - else
+        = link_to '取消', admin_user_path(@admin_user), :class => "btn"

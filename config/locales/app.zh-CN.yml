@@ -1,0 +1,76 @@
+#当前程序的本地化字符串, ':'号必须有一个空格,否则会出错!
+
+"zh-CN":
+  app:
+    Yfplatform: 湖北省电力公司电气设备红外检测智能分析管理系统
+    home: 首页
+    import: 导入
+    outport: 导出
+    task: 任务顺序
+    analyse: 查询
+    ir_query: 图谱查询
+    outport_report: 输出报告
+    contact: 联系
+    about: 关于
+    logined: 登录
+    logout: 注销
+    language: 语言
+    copyright: 美盛光电
+    
+    data_dictionary: 数据词典    
+    basic_data: 基础资料
+    shoot_sequence: 拍摄顺序
+    ir_detection: 红外检测
+    voltage_levels: 电压等级
+    fault_natures: 缺陷性质 
+    execute_cases: 执行情况 
+    fault_degrees: 缺陷程度 
+    fix_methods: 消缺方式
+    part_positions: 部位
+    uploadify: '导入'
+    special: '单条录入'
+    rules: '诊断规则'
+    tasks: '制作任务包'
+
+    device_area_types: 设备区类型
+    device_areas: 设备区
+    employees: 员工
+    users: 操作员
+    device_types: "设备类型"
+    regions: 区域
+    substations: 变电站或线路
+    model_styles: 设备型号
+    device_areas: 设备区
+    devices: 设备明细    
+
+    users_and_permission: 用户与权限
+    permission: 权限
+
+    device_areas_to_select: 待选择设备区
+    devices_to_select: 待选择设备
+
+    shoot_sequences_index: 拍摄顺序列表
+    define_dashboard: 顺序规划面板
+    device_area_shoot_sequence: 设备区拍摄顺序
+    device_shoot_sequence: 设备拍摄顺序
+    part_position_shoot_sequence: 部位拍摄顺序
+
+    detections_list: 红外图谱列表
+    detections_query: 红外图谱查询
+    batch_import: 批量导入
+    detection_resources: 红外检测资源
+    users_center: 用户管理
+
+    open: 打开
+    detail: 明细
+    show: 显示
+
+    devise:
+      sign_in: 登录
+      sign_up: 注册
+      email: 电子邮件
+      password: 密码
+      remember_me: 下次自动登录
+      forgot_your_password: 忘记密码
+      password_confirmation: 密码确认
+

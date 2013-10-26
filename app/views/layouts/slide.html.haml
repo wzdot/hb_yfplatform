@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    = render 'layouts/head'
+
+  %body{:style => "height:100%"}
+    - nav_menu = 'home_nav_menu'
+    = render 'layouts/navbar', :nav_menu => nav_menu
+
+    .container
+      #content-container.span10.content.thumbnails
+        .notice
+          = notice
+        .alert{ :style => "display:none;" }
+          = alert
+        .main-content
+    = yield
+
+    = render 'layouts/foot'

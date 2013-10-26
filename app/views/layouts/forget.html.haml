@@ -1,0 +1,19 @@
+﻿!!!
+%html
+  %head
+    = render 'layouts/head'
+
+  %body
+    .container-fluid
+      .row-fluid
+        .span12.content
+          .main-content		    
+            .get_password_box
+              .get_password_t 
+                %h1 YFplatform 
+                %span 安全中心
+              .get_password_c  
+                = yield
+
+
+    = render 'layouts/foot'

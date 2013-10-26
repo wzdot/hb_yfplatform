@@ -1,0 +1,80 @@
+:javascript
+  var devices_to_select_tree_setting = {
+    async: {
+      enable: true,
+      url: get_url_for_devices_to_select_tree,
+      type: "get",
+      autoParam: [ "id", "name=n", "level=lv" ],
+      otherParam:{ "otherParam" : "devices_to_select_tree" }
+    },
+    edit: {
+      enable: true,
+      showRemoveBtn: false,
+      showRenameBtn: false
+    },
+    view: {
+      selectedMulti: true,
+      expandSpeed: ""
+    },
+
+    callback: {
+      //onAsyncSuccess: onAsyncSuccess,
+      //onAsyncError: onAsyncError,
+      //beforeDrag: beforeDrag,
+      beforeDrop: before_drop_to_devices_to_select_tree,
+      onDrop: on_devices_to_select_drop
+    }
+  };
+
+  function get_url_for_devices_to_select_tree( treeId, treeNode ) {
+    var level;
+    if( !treeNode ) { 
+      level = -1; 
+    } else {
+      level = treeNode.level;
+    }
+    //alert( "treeId:" + treeId + " treeNode:" + treeNode + " level: " + level );
+
+    var param;
+    if( treeNode ) {
+      param  = treeNode.id; 
+    } else {
+      param = 0;
+    }
+
+    //只显示一层，显示待选择的设备
+    if( level < 0 ) {
+      //获取当前选择的设备区
+      var obj_shoot_sequences_tree = $.fn.zTree.getZTreeObj( "shoot_sequences_tree" );
+
+      var selected_nodes = obj_shoot_sequences_tree.getSelectedNodes();
+      if( selected_nodes.length < 1 ) { return ""; }
+
+      var cur_node = selected_nodes[ 0 ];
+
+      //alert( "shoot_sequences_tree: name: " + cur_node.name + " id: " + cur_node.id + " level: " + cur_node.level );
+
+      var cur_node_level = cur_node.level;
+      // level 0 是设备区
+      if( cur_node_level != 0 ) { 
+        return "";
+      }
+
+      param = cur_node.id;
+      return "/task/device_area_shoot_sequences/" + param + "/get_devices_to_select.json?level=" + level;
+    }
+  }
+
+  function before_drop_to_devices_to_select_tree(treeId, treeNodes, targetNode, moveType) {
+    if( treeId == "devices_to_select_tree" ) {
+      if( moveType == "inner" ) { return false; }
+    }
+    return targetNode ? targetNode.drop != false : true;
+  }
+
+  //从当前树拖到另一棵树时，也会调用这个函数
+  function on_devices_to_select_drop( event, treeId, treeNodes, targetNode, moveType ) {
+    //alert( "onDrop treeId " + treeId );
+    //alert(treeNodes.length + "," + (targetNode ? (targetNode.tId + ", " + targetNode.name) : "isRoot" ));
+    $( "#btn_save_shoot_sequence" ).attr( "disabled", false );
+  }

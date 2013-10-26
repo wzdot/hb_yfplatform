@@ -1,0 +1,97 @@
+= stylesheet_last "referenced-jquery.contextMenu","page-analyse"
+= javascript_last "jquery.contextmenu.r2","analyse"
+#layer
+#picturebox.picturebox{:style => "display:none"}
+  %img{:alt => "红外图"}/
+  %img.closeimg{:alt => "红外图", :src => "/assets/close.jpg"}/
+#list1_menu.contextMenu
+  %ul
+    %li#delete_data 删除
+    %li#edit_data 编辑
+    %li#close_menu 关闭菜单
+
+.container-fluid
+  .row-fluid.wraper.clearfix
+    / nav-left part
+    .span2.nav_left
+      %p.bg_gradient
+        查询目录
+      %ul#roleTree.ztree
+    .span10
+      .query_items.clearfix#query_items
+        %p.bg_gradient 查询
+        .form_part#form_part
+          %form#query.query{:action => "", :method => ""}           
+            %label{:for => "query_voltage_level"} 设备电压：
+            .styled-select
+              = collection_select(:query, :voltage_level, VoltageLevel.select("id, name").order('notes+0 ASC'), :id, :name, {:prompt => "- 请选择 -"})
+            %label.zone{:for => "zone"} 变/输/配：
+            .zone
+              %select#zone
+                %option - 请选择 -
+                %option 变电
+                %option 输电
+                %option 配电
+            %label{:for => "query_device_type"} 设备类型：
+            .styled-select#device_type
+              = collection_select(:query, :device_type, DeviceType.select("id, name").order('name'), :id, :name, {:prompt => "- 请选择 -"})
+            %label{:for => "begin_date"} 日期：
+            %input#begin_date{:type => 'text'}
+            %label{:for => "end_date"} 至
+            %input#end_date{:type => 'text'}
+            
+          %form.query_defect#query_defect{:action => "", :method => ""}
+            .total_number
+              %span.query_defect_total
+                合计：
+              %em#span_defect_total  
+        .btn_part#btn_part      
+          .query_reset_btn
+            %button#btn_submit 查找过滤
+            %button#btn_reset 显示所有
+          .analyse_btn
+            %button.selected_analyse#selected_analyse 选中项重新诊断
+            %button.all_analyse#all_analyse 全部重新诊断
+          .slider_report_btn
+            %button.slider_btn#btn_slider 幻灯片播放
+            .report_part#report_part
+              %button.report_btn#report_s 选择报告模版
+              .choose_templet#choose_templet
+                %img{:alt => "红外图", :src => "/assets/arrow_up.png"}/      
+                %ul    
+      .query_results
+        %table#list1
+        #pager1
+  .span12
+    %p.bg_gradient.clearfix
+      %span.phase_compare#phase_compare 相别对比
+      %span.history_compare#history_compare 历史对比 
+      %span.description#description
+      %span.prev_next#prev_next 
+        %img.load_gif#load_gif{:src => "/assets/load.gif"}/
+        %input.prev_pic#prev_pic{:type => "button", :value => "<<"}/
+        %input.next_pic#next_pic{:type => "button", :value => ">>"}/     
+    .details_pic.clearfix#details_pic
+      .details_pic_l
+        %p.phaseAA 
+        %img.pictureAA{:alt => "红外图",:height => 225,:width =>300, :src => "/assets/display-picture.png", :onerror => "this.src='/assets/display-picture-error.png'"}/
+        %table#smalltable0
+      .details_pic_m
+        %p.phaseAA 
+        %img.pictureAA{:alt => "红外图",:height => 225,:width =>300, :src => "/assets/display-picture.png", :onerror => "this.src='/assets/display-picture-error.png'"}/
+        %table#smalltable1      
+      .details_pic_r
+        %p.phaseAA 
+        %img.pictureAA{:alt => "红外图",:height => 225,:width =>300,  :src => "/assets/display-picture.png", :onerror => "this.src='/assets/display-picture-error.png'"}/    
+        %table#smalltable2 
+    .details_history.clearfix#details_history
+      .clearfix.details_current_item#details_current_item
+        %ul#item_current.item_current
+          %li
+            %p  
+            %img{:alt => "红外图",:height => 225,:width =>300, :src => "/assets/display-picture.png", :onerror => "this.src='/assets/display-picture-error.png'"}/
+            %table
+      .clearfix.details_history_items#details_history_items
+        %p.no_history_items#no_history_items 暂无历史记录
+        %ul#items_history.items_history
+  / nav-bottom part

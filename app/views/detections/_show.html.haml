@@ -1,0 +1,13 @@
+%h4= active_scaffold_config.show.label(@record.to_label.nil? ? nil : @record.to_label)
+
+= render :partial => 'show_columns', :locals => {:columns => active_scaffold_config.show.columns}
+
+%br
+.clearfix
+
+.nested-scaffold
+  = render :active_scaffold => 'detection_resources', :params => {:detection_id => params[:id], :mode => 'mini'}, :constraints => { :detection => @record.id }
+
+%p.form-footer
+  = link_to as_(:close), main_path_to_return, :class => 'as_cancel', :remote => request.xhr?, 'data-refresh' => false
+  = loading_indicator_tag(:action => :create, :id => params[:id])

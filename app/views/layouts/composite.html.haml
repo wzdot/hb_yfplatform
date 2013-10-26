@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    = render 'layouts/head'
+    = stylesheet_link_tag 'page-composite'
+
+  %body
+    - nav_menu = 'home_nav_menu'
+    = render 'layouts/navbar', :nav_menu => nav_menu
+    .container-fluid
+      .row-fluid
+        .span2
+          =# render 'layouts/data_dictionary_sidebar'
+
+        .span10.content
+          .notice
+            = notice
+          .alert{ :style => "display:none;" }
+            = alert
+          .main-content
+            = yield
+			
+    = render 'layouts/foot'
+
+= javascript_include_tag "application"

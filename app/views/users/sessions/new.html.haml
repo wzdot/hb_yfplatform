@@ -1,0 +1,39 @@
+= stylesheet "application"
+= javascript "application"
+= stylesheet_last 'page-login'
+= javascript_last "users"
+
+
+.bg_login
+  .login_box
+    %p.login_head YF红外检测一体化分析平台
+    = form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => true) do |f|
+      %p.login_title 用户登录
+      %p.line_name
+        %label{:for => "user_email"} 电子邮件：
+        %input#user_email.input{ :placeholder => "电子邮件", :type => "email", :name => "user[email]" }/
+        %span.warn_message 请输入电子邮件
+      %p.line_password
+        %label.label_password{ :for => "user_password" }
+          %span> 密
+          码：
+        %input#user_password.input.input_password{ :placeholder => "密码", :type => "password", :name => "user[password]" }/
+        %span.warn_message 请输入密码
+      %p.smscode_box
+        %label{:for => "user_smscode"} 认&nbsp;证 &nbsp;码：
+        %input#user_smscode.input{ :placeholder => "认证码", :name => "user[smscode]" }
+        = submit_tag '获取短信认证码', :id => 'btn_ask_sms', :type => 'button', :class => 'btn'
+        %span.warn_message 请输入认证码
+      %p.captcha_box
+        %label{:for => "user_captcha"} 验&nbsp;证 &nbsp;码：
+        %input#user_captcha.input{ :placeholder => "验证码", :name => "user[captcha]" }
+        = image_tag '', :id => 'captcha'
+        %span.warn_message 请输入验证码
+      %p.line_checkbox
+        %input#login_checkbox{:type => "checkbox", :name => "user[remember_me]", :value => 1}/
+        %label.login_checkbox{:for => "login_checkbox"} 下次自动登录
+        = link_to '忘记密码？', new_user_password_path
+      %p.line_submit
+        %input.btn.btn-large{:type => "submit", :value => "登录", :id => :sign_in}/
+        %a.btn_register{:href => ""}
+          %input.btn.btn-large{:type => "reset", :value => "清空"}/

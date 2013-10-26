@@ -1,0 +1,14 @@
+- uri_root = '/basic_data'
+- path = request.path 
+- path = "#{uri_root}/regions" if path == uri_root
+- sub_items = ['regions', 'substations', 'model_styles', 'device_areas', 'devices']
+- cache(:"#{I18n.locale}#{path}") do
+	.well.sidebar-nav
+		%ul.nav.nav-list
+			%li.nav-header.bg_gradient
+				= t( "app.basic_data" )
+			- sub_items.each do |item|
+				- if "#{uri_root}/#{item}" == path
+					%li.active=link_to t( "app.#{item}" ), send("#{item}_path")
+				- else
+					%li=link_to t( "app.#{item}" ), send("#{item}_path")

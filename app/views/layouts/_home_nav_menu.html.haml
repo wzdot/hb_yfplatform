@@ -1,0 +1,43 @@
+- menu = request.path.sub('/', '').split('/')[0]
+- menu = 'analyse' if menu.nil?
+- cache(:"#{I18n.locale}_home_nav_#{menu}_#{current_user.admin?}") do
+	- nav_items = {:analyse => 'analyse', :uploadify => 'uploadify', :special => 'special'}
+	- nav_items.merge!(:data_dictionary => 'data_dictionary', :basic_data => 'basic_data', :users_center => 'users_center') if current_user.admin?
+	- nav_items.merge!(:logout => 'sign_out')
+	%ul.nav.clearfix
+		- nav_items.each do |key, value|
+			-if value == 'uploadify'
+				-if value == menu
+					%li.dropdown.active
+						%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} 
+							= t( "app.#{key}" )
+						.dropdown-menu#dropdown-menu
+							%img{:src => "/assets/arrow_up.png"}/
+							%ul.dropdown-menu
+								- if current_user.admin?
+									%li
+										= link_to "基础数据", '/uploadify/basic_data'
+								%li
+									= link_to "拍摄结果", '/uploadify/shoot_data'
+				-else
+					%li.dropdown
+						%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} 
+							= t( "app.#{key}" )
+						.dropdown-menu#dropdown-menu
+							%img{:src => "/assets/arrow_up.png"}/
+							%ul.dropdown-menu
+								- if current_user.admin?
+									%li
+										= link_to "基础数据", '/uploadify/basic_data'
+								%li
+									= link_to "拍摄结果", '/uploadify/shoot_data'
+			-else
+				-if value == menu
+					%li.active= link_to t( "app.#{key}" ), "/#{value}"
+				- else
+					%li= link_to t( "app.#{key}" ), "/#{value}"
+
+
+
+
+

@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    = stylesheet 'application'
+    = javascript 'application'
+    = stylesheet_last 'page-data-dictionary'
+    = render 'layouts/head'
+
+  %body
+    - nav_menu = 'home_nav_menu'
+    = render 'layouts/navbar', :nav_menu => nav_menu
+    .container-fluid
+      .row-fluid
+        .span2
+          = render 'layouts/basic_data_sidebar'
+
+        .span10.content
+          .notice
+            = notice
+          .alert{ :style => "display:none;" }
+            = alert
+          .main-content
+            = yield
+
+    = render 'layouts/foot'

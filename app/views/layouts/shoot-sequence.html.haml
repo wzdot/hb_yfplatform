@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    = render 'layouts/head'
+  %body
+    - nav_menu = 'shoot_sequence_nav_menu'
+    = render 'layouts/navbar', :nav_menu => nav_menu
+    .container-fluid
+      .row-fluid
+        .span12.content
+          .notice
+            = notice
+          .alert
+            = alert
+          .main-content
+            = yield
+
+      %hr
+      %footer
+        %p.pull-right
+          &copy;
+          = "#{ t 'app.copyright' } 2012"
+
+= javascript_include_tag "application"
+

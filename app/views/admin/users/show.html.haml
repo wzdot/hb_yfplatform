@@ -1,0 +1,45 @@
+= stylesheet 'application'
+= javascript 'application'  
+= stylesheet_last 'page-admin'
+%h2.bg_gradient
+  = @admin_user.name
+  - if @admin_user.blocked
+    %small 锁定
+  - if @admin_user.admin
+    %small 管理员
+  = link_to '编辑', edit_admin_user_path(@admin_user), :class => "btn small right"
+
+
+
+%table.zebra-striped.table-bordered
+  %tr
+    %td
+      邮箱
+    %td
+      = @admin_user.email
+  %tr
+    %td
+      管理员
+      %td= check_box_tag "admin", 1, @admin_user.admin, :disabled => :disabled
+  %tr
+    %td
+      锁定
+      %td= check_box_tag "blocked", 1, @admin_user.blocked, :disabled => :disabled
+
+%br
+
+:css 
+  form select { 
+    width:150px;
+  }
+
+  #project_ids {
+    width:300px;
+  }
+
+  
+:javascript 
+  $('select#project_ids').chosen();
+  $('select#repo_access').chosen();
+  $('select#project_access').chosen();
+

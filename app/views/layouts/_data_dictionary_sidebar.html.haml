@@ -1,0 +1,13 @@
+- path = request.path 
+- path = "/data_dictionary/voltage_levels" if path == '/data_dictionary'
+- cache(:"#{I18n.locale}#{path}") do
+	- sub_items = ['voltage_levels', 'fault_natures', 'execute_cases', 'fault_degrees', 'fix_methods', 'part_positions', 'employees', 'device_area_types', 'device_types']
+	.well.sidebar-nav
+		%ul.nav.nav-list
+			%li.nav-header.bg_gradient
+				= t( "app.data_dictionary" )
+			- sub_items.each do |item|
+				- if "/data_dictionary/#{item}" == path
+					%li.active=link_to t( "app.#{item}" ), send("#{item}_path")
+				- else
+					%li=link_to t( "app.#{item}" ), send("#{item}_path")

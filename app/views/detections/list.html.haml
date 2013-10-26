@@ -1,0 +1,35 @@
+.row-fluid
+  .span2.regions
+    %h3
+      = t( "app.regions" )
+    .well.sidebar-nav
+      %ul#regions_tree.ztree{ :style => "width: 230px; overflow: auto;" }
+
+  .span10.detections
+    %h3
+      = t( "app.ir_query" )
+    .well.sidebar-nav
+      = render :partial => 'list_with_header'
+
+:javascript
+  //当前选择的拍摄顺序的id
+  function get_cur_shoot_sequence_id() {
+    var obj_regions_tree = $.fn.zTree.getZTreeObj( "regions_tree" );
+    if( obj_regions_tree ) {
+      var nodes = obj_regions_tree.getSelectedNodes();
+      if( nodes.length > 0 ) {
+        var cur_node = nodes[ 0 ];
+        return cur_node.id;
+      }
+    }
+
+    return -1;
+  }
+
+= render "shared/regions_tree"
+
+:javascript
+  $( document ).ready( function() {
+    //初始化区域
+    $.fn.zTree.init( $( "#regions_tree" ), regions_tree_setting );
+  });

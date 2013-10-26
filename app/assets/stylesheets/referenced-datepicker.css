@@ -1,0 +1,35 @@
+body {
+	font-size: 62.5%;
+	font-family: "Trebuchet MS", "Arial", "Helvetica", "Verdana", "sans-serif";
+}
+
+table {
+	font-size: 1em;
+}
+
+.demo-description {
+	clear: both;
+	padding: 12px;
+	font-size: 1.3em;
+	line-height: 1.4em;
+}
+
+.ui-draggable, .ui-droppable {
+	background-position: top;
+}
+.ui-datepicker {
+	background: #eee;
+	border: 1px solid #ccc;
+}
+.ui-datepicker .ui-datepicker-header {
+	background: #499996;
+	border-color: #ccc;
+}
+
+.ui-datepicker  table.ui-datepicker-calendar {
+	font-family:'微软雅黑','microsoft yahei','Apple LiGothic Medium','SimHei',Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-top: none;
+}

@@ -1,0 +1,322 @@
+# Chinese (China) translations for Ruby on Rails 
+# by tsechingho (http://github.com/tsechingho)
+
+"zh-CN":
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b%d日"
+      long: "%Y年%b%d日"
+    day_names: [星期天, 星期一, 星期二, 星期三, 星期四, 星期五, 星期六]
+    abbr_day_names: [日, 一, 二, 三, 四, 五, 六]
+    month_names: [~, 一月, 二月, 三月, 四月, 五月, 六月, 七月, 八月, 九月, 十月, 十一月, 十二月]
+    abbr_month_names: [~, 1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月]
+  
+  time:
+    formats:
+      default: "%Y年%b%d日 %H:%M"
+      short: "%b%d日 %H:%M"
+      long: "%Y年%b%d日 %H:%M"
+      picker: "日期"  #add by foyo99
+    am: "上午"
+    pm: "下午"
+  
+  datetime:
+  
+    prompts:
+      year:   "年"
+      month:  "月"
+      day:    "日"
+      hour:   "时"
+      minute: "分"
+      second: "秒"
+
+    distance_in_words:
+      half_a_minute: "半分钟"
+      less_than_x_seconds:
+        one: "一秒内"
+        other: "少于 %{count} 秒"
+      x_seconds:
+        one: "一秒"
+        other: "%{count} 秒"
+      less_than_x_minutes:
+        one: "一分钟内"
+        other: "少于 %{count} 分钟"
+      x_minutes:
+        one: "一分钟"
+        other: "%{count} 分钟"
+      about_x_hours:
+        one: "大约一小时"
+        other: "大约 %{count} 小时"
+      x_days:
+        one: "一天"
+        other: "%{count} 天"
+      about_x_months:
+        one: "大约一个月"
+        other: "大约 %{count} 个月"
+      x_months:
+        one: "一个月"
+        other: "%{count} 个月"
+      about_x_years:
+        one: "大约一年"
+        other: "大约 %{count} 年"
+      over_x_years:
+        one: "一年以上"
+        other: "%{count} 年以上"
+  
+  number:
+    format:
+      separator: "."
+      delimiter: ","
+      precision: 3
+    currency:
+      format:
+        format: "%u %n"
+        unit: "CNY"
+        separator: "."
+        delimiter: ","
+        precision: 2
+    percentage:
+      format:
+        delimiter: ""
+    precision:
+      format:
+        delimiter: ""
+    human:
+      format:
+        delimiter: ""
+        precision: 1
+  
+  support:
+    array:
+      sentence_connector: "和"
+      skip_last_comma: true
+  
+  activerecord:
+    models:
+      voltage_level:
+        one: 电压等级
+        other: 电压等级
+      fault_nature: 
+        one: 缺陷性质 
+        other: 缺陷性质
+      execute_case: 
+        one: 执行情况 
+        other: 执行情况
+      fault_degree: 
+        one: 缺陷程度 
+        other: 缺陷程度
+      fix_method:
+        one: 消缺方式
+        other: 消缺方式
+      part_position: 
+        one: 部位
+        other: 部位
+      device_area_type: 
+        one: 设备区类型
+        other: 设备区类型
+      employee:
+        one: 员工
+        other: 员工
+      region:
+        one: 区域
+        other: 区域
+      substation:
+        one: 变电站或线路
+        other: 变电站或线路
+      device_area_type:
+        one: 设备区类型
+        other: 设备区类型
+      device_area:
+        one: 设备区
+        other: 设备区
+      device_type:
+        one: 设备类型
+        other: 设备类型
+      model_style:
+        one: 设备型号
+        other: 设备型号
+      device:
+        one: 设备明细
+        other: 设备明细
+      device_area_shoot_sequence:
+        one: 设备区拍摄顺序
+        other: 设备区拍摄顺序
+      device_shoot_sequence:
+        one: 设备拍摄顺序
+        other: 设备拍摄顺序
+      shoot_sequence:
+        one: 拍摄顺序定义
+        other: 拍摄顺序定义
+
+      detection:
+        one: 红外图谱
+        other: 红外图谱
+      detection_resource:
+        one: 红外检测资源
+        other: 红外检测资源
+
+    attributes:
+      voltage_level:
+        name: "名称"
+        notes: "备注"
+        created_at: "创建于"
+        updated_at: "最后更新"
+      fault_nature:
+        name: "名称"
+        notes: "备注"
+        created_at: "创建于"
+        updated_at: "最后更新"
+      execute_case:
+        name: "名称"
+        notes: "备注"
+        created_at: "创建于"
+        updated_at: "最后更新"
+      fault_degree:
+        name: "名称"
+        notes: "备注"
+        created_at: "创建于"
+        updated_at: "最后更新"
+      fix_method:
+        name: "名称"
+        notes: "备注"
+        created_at: "创建于"
+        updated_at: "最后更新"
+      part_position:
+        name: "名称"
+        notes: "备注"
+        created_at: "创建于"
+        updated_at: "最后更新"
+      region:
+        name: 名称
+        notes: 备注
+        parent: 上级
+      substation:
+        name: 名称
+        notes: 备注
+        region: 所属区域
+        voltage_level: 电压等级
+        device_areas: 属下设备区
+      device_area_type:
+        name: "名称"
+        notes: "备注"
+        created_at: "创建于"
+        updated_at: "最后更新"
+      employee:
+        name: 姓名
+        email: 电子邮件
+        mobile: 手机
+        tel: 固话
+        region: 区域
+        created_at: "创建于"
+        updated_at: "最后更新"
+
+      device_type:
+        name: 名称
+        notes: 备注
+        parent: 上级
+      model_style:
+        model_style: 设备型号
+        name: 设备名称
+        device_type: 类型
+        voltage_level: 电压等级  
+        notes: 备注
+      device_area:
+        name: 名称
+        device_area_type: 类型
+        substation: 变电站/线路
+        device_area_name: 设备区名称
+        voltage_level: 电压等级  
+      device:
+        substation: 变电站/线路
+        device_area: 设备区
+        device_type: 设备类型
+        device_name: 设备名称
+        model_style: 设备型号
+        phasic: 相别
+        local_scene_name: 现场名称
+      shoot_sequence:
+        substation: 变电站/线路
+        name: 顺序名称
+        device_area_shoot_sequences: 设备区顺序
+        notes: 备注
+
+      device_area_shoot_sequence:
+        substation: 变电站或线路
+        shoot_sequence: 定义
+        order_num: 序号
+        device_area: 设备区
+        device_shoot_sequences: 设备顺序
+      device_shoot_sequence:
+        substation: 变电站或线路
+        shoot_sequence: 定义
+        device_area: 设备区
+        order_num: 序号
+        device: 设备
+
+      detection:
+        detect_date: 检测日期
+        detect_time: 检测时间
+        device: 设备
+        part_position: 部位
+        fault_nature: 缺陷类型
+        fault_degree: 缺陷程度
+        execute_case: 执行情况
+        fix_method: 消缺方式
+        fixed_date: 消缺日期
+        running_voltage: 运行电压
+        electrical_current: 负荷电流
+        detection_resources: 资源
+
+      detection_resource:
+        irimage: 红外图
+        params_json: 分析参数(json)
+        irjson: 分析结果
+        irp: 原始红外图
+        irv: 原始红外视频
+        irv_pos_start: 红外视频起点
+        irv_pos_end: 红外视频结束点
+        viimage: 可见光图片
+        detection: 检测
+        created_at: 创建日期
+        updated_at: 编辑日期
+      user:
+        email: 电子邮件
+        name: 用户名
+        password: 密码
+        password_confirmation: 密码重复
+        mobile: 手机号码
+   
+    errors:
+      template:
+        header: 
+          one: "有 1 个错误发生导致「%{model}」无法被保存。"
+          other: "有 %{count} 个错误发生导致「%{model}」无法被保存。"
+        body: "如下字段出现错误："
+      messages:
+        inclusion: "不包含于列表中"
+        exclusion: "是保留关键字"
+        invalid: "是无效的"
+        confirmation: "与确认值不匹配"
+        accepted: "必须是可被接受的"
+        empty: "不能留空"
+        blank: "不能为空字符"
+        too_long: "过长（最长为 %{count} 个字符）"
+        too_short: "過短（最短为 %{count} 个字符）"
+        wrong_length: "长度非法（必须为 %{count} 个字符）"
+        taken: "已经被使用"
+        not_a_number: "不是数字"
+        greater_than: "必须大于 %{count}"
+        greater_than_or_equal_to: "必须大于或等于 %{count}"
+        equal_to: "必须等于 %{count}"
+        less_than: "必须小于 %{count}"
+        less_than_or_equal_to: "必须小于或等于 %{count}"
+        odd: "必须为单数"
+        even: "必须为双数"
+      models:
+        user:
+          attributes:
+            reset_password_token:
+              invalid: 密码重置令牌已失效
+              expired: 密码重置令牌已失效
+              sms_code_mismatch: 短信认证码不匹配

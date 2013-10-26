@@ -1,0 +1,147 @@
+.row-fluid
+  .span2.regions
+    %h3
+      = t( "app.regions" )
+    .well.sidebar-nav
+      %ul#regions_tree.ztree{ :style => "width: 230px; overflow: auto;" }
+
+  .span2.shoot_sequences
+    %h3
+      = t( "app.shoot_sequence" )
+    .well.sidebar-nav
+      %ul#shoot_sequences_tree.ztree
+
+  .span8
+    #device_areas_to_select
+      %h4
+        = t( "app.device_areas_to_select" )
+      .well.sidebar-nav
+        %ul#device_areas_to_select_tree.ztree{ :style => "overflow: auto;" }
+        %p test some thing
+    #devices_to_select
+      %h4
+        = t( "app.devices_to_select" )
+      .well.sidebar-nav
+        %ul#devices_to_select_tree.ztree{ :style => "overflow: auto;" }
+        %p test some thing
+
+:javascript
+
+  $( document ).ready( function() {
+    //alert( "ready" );
+    var zTreeObj;
+    var setting = {
+      async: {
+        enable: true,
+        url: getUrl
+      },
+      edit: {
+        enable: true,
+        showRemoveBtn: false,
+        showRenameBtn: false
+      },
+      view: {
+        selectedMulti: false,
+        expandSpeed: ""
+      },
+
+      callback: {
+        beforeExpand: beforeExpand,
+        onAsyncSuccess: onAsyncSuccess,
+        onAsyncError: onAsyncError,
+        beforeDrag: beforeDrag,
+        beforeDrop: beforeDrop
+      }
+    };
+
+    var zTreeNodes = [
+      {"name":"网站导航", open:true, children: [
+            { "name":"google", "url":"http://g.cn", "target":"_blank"},
+            { "name":"baidu", "url":"http://baidu.com", "target":"_blank"},
+            { "name":"sina", "url":"http://www.sina.com.cn", "target":"_blank"}
+         ]
+      }
+    ];
+
+    function getUrl( treeId, treeNode ) {
+      //alert( "getUrl treeId:" + treeId + " treeNode:" + treeNode );
+      var param;
+      if( treeNode ) {
+        param  = treeNode.id; }
+      else {
+        param = 0;
+      }
+      return "regions/" + param + "/get_childs";
+    }
+    function beforeExpand( treeId, treeNode ) {
+      //alert( "beforeExpand" );
+      if( !treeNode.isAjaxing ) {
+        ajaxGetNodes( treeNode, "refresh" );
+        return true;
+      } else {
+        alert( "zTree 正在下载数据中，请稍后展开节点。。。" );
+        return false;
+      }
+    }
+    function onAsyncSuccess( event, treeId, treeNode, msg ) {
+      if( !msg || msg.length == 0 ) {
+        return;
+      }
+      var zTree = $.fn.zTree.getZTreeObj( "regions_tree" );
+      if( treeNode ) {
+        treeNode.icon = "";
+        zTree.updateNode( treeNode );
+        zTree.selectNode( treeNode.children[ 0 ] );
+      }
+    }
+    function onAsyncError( event, treeId, treeNode, XMLHttpRequest, textStatus, errorThrown ) {
+      var zTree = $.fn.zTree.getZTreeObj( "regions_tree" );
+      alert("异步获取数据出现异常。");
+      treeNode.icon = "";
+      zTree.updateNode(treeNode);
+    }
+    function ajaxGetNodes( treeNode, reloadType ) {
+      var zTree = $.fn.zTree.getZTreeObj( "regions_tree" );
+      if( reloadType == "refresh" ) {
+        treeNode.icon = "#{ asset_path( 'loading.gif' ) }";
+        zTree.updateNode( treeNode );
+      }
+      zTree.reAsyncChildNodes( treeNode, reloadType, true );
+    }
+
+    function beforeDrag(treeId, treeNodes) {
+      for (var i=0,l=treeNodes.length; i<l; i++) {
+        if (treeNodes[i].drag === false) {
+          return false;
+        }
+      }
+      return true;
+    }
+    function beforeDrop(treeId, treeNodes, targetNode, moveType) {
+      return targetNode ? targetNode.drop !== false : true;
+    }
+
+    //初始化区域
+    zTreeObj = $.fn.zTree.init( $( "#regions_tree" ), setting );
+
+    //初始化拍摄顺序
+    var obj_shoot_sequences_tree;
+    var fn_init_shoot_sequences_tree = function() {
+      obj_shoot_sequences_tree = $.fn.zTree.init( $( "#shoot_sequences_tree" ), setting, zTreeNodes );
+    };
+    fn_init_shoot_sequences_tree();
+
+    //初始化待选择设备区
+    var obj_device_areas_to_select;
+    var fn_init_device_areas_to_select = function() {
+      obj_device_areas_to_select = $.fn.zTree.init( $( "#device_areas_to_select_tree" ), setting, zTreeNodes );
+    };
+    fn_init_device_areas_to_select();
+
+    //初始化待选择设备
+    var obj_devices_to_select;
+    var fn_init_devices_to_select = function() {
+      obj_devices_to_select = $.fn.zTree.init( $( "#devices_to_select_tree" ), setting, zTreeNodes );
+    };
+    fn_init_devices_to_select();
+  });

@@ -1,0 +1,22 @@
+!!!
+%html
+  %head
+    = render 'layouts/head'
+    = stylesheet_link_tag 'page-task'
+  %body
+    - nav_menu = 'home_nav_menu'
+    = render 'layouts/navbar', :nav_menu => nav_menu
+    .container-fluid
+      .row-fluid
+        .span2
+          = render 'layouts/task_sidebar'
+
+        .span10.content
+          .main-content
+            = yield
+
+    = render 'layouts/foot'
+
+= yield :javascript
+= yield :last
+

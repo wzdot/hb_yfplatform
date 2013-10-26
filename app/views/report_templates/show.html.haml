@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @report_template.name
+%p
+  %b cover:
+  = @report_template.cover_file_name
+%p
+  %b Order by1:
+  = @report_template.order_by1
+%p
+  %b Order by2:
+  = @report_template.order_by2
+%p
+  %b Order by3:
+  = @report_template.order_by3
+%p
+  %b Order by4:
+  = @report_template.order_by4
+%p
+  %b Order by5:
+  = @report_template.order_by5
+%p
+  %b Order by6:
+  = @report_template.order_by6
+
+= link_to 'Edit', edit_report_template_path(@report_template)
+\|
+= link_to 'Back', report_templates_path

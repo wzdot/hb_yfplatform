@@ -1,0 +1,2 @@
+module DeviceAreasHelper
+end

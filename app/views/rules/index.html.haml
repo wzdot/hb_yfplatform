@@ -1,0 +1,273 @@
+= stylesheet 'application'
+= javascript 'application' 
+= stylesheet_last "page-rules", "referenced-uploadify"
+= javascript_last "jquery.uploadify-3.1.min", "raphael", "raphael.draggable", "page-rules"
+
+.help-layer#help-layer
+.help-popbox#help-popbox
+  %h2.bg_gradient 操作流程
+  %img{:id => "close-help-popbox", :alt => "关闭", :src => "/assets/close.jpg"}
+  %ul.help-content
+    %li 1.查找定位设备型号及部位
+    %li 2.装载标注红外图
+    %li 3.装载基准图
+    %li 4.画分析单元
+    %li 5.输入判据
+    %li 6.输入分析条件
+    %li 7.保存
+
+.main-section.clearfix
+  .query-section
+    .query-condition
+      %h2.bg_gradient 查询条件
+      %form.clearfix{:action => ""}
+        %ul.query-select.clearfix
+          %li
+            %label 设备类型:
+            %select
+              %option - 请选择 -
+          %li
+            %label 电压等级:
+            %select
+              %option - 请选择 -
+          %li
+            %label 生产厂家:
+            %select
+              %option - 请选择 -
+          %li
+            %label 变电站/线路:
+            %select
+              %option - 请选择 -
+        .evaluation-group.clearfix
+          %ul.query-missing
+            %li
+              %input{:type => "checkbox", :id => "missing-irp"}/
+              %label{:for => "missing-irp"} 缺红外图
+            %li
+              %input{:type => "checkbox", :id => "missing-irm"}/
+              %label{:for => "missing-irm"} 缺可见光
+            %li
+              %input{:type => "checkbox", :id => "missing-layout"}/
+              %label{:for => "missing-layout"} 缺基准图
+          %ul.query-unsatisfy
+            %li
+              %input{:type => "checkbox", :id => "unsatisfy-irp"}/
+              %label{:for => "unsatisfy-irp"} 不满意红外图
+            %li
+              %input{:type => "checkbox", :id => "unsatisfy-irm"}/
+              %label{:for => "unsatisfy-irm"} 不满意可见光
+            %li
+              %input{:type => "checkbox", :id => "unsatisfy-layout"}/
+              %label{:for => "unsatisfy-layout"} 不满意基准图
+        .query-btn-group.clearfix
+          %button.clear-btn{:title => "清空查询条件", :type => "button"}
+            %img{:alt => "", :src => "assets/icon-clear.png"}>/
+            清空
+          %button.query-btn{:title => "按选择的查询条件进行查找", :type => "button"}
+            %img{:alt => "", :src => "assets/bg_02.png"}>/
+            查找
+    .query-result
+      %h2.bg_gradient 查询结果
+  .manipulate-section
+    %h2.bg_gradient 操作区
+    .control-btn
+      .add-irp
+        %input{:type => "button", :id => "add-irp-btn"}
+      .add-irp
+        %input{:type => "button", :id => "add-irm-btn"}
+      .add-irp
+        %input{:type => "button", :id => "add-bmp-btn"}
+      .add-irp
+        %input{:type => "button", :id => "add-multi-btn"}
+      %button{:type => "button", :id => "show-irp"}
+        %img{:alt => "", :src => "assets/icon-show.png"}>/
+        %span 隐藏红外图
+      %button{:type => "button", :id => "show-irm"}
+        %img{:alt => "", :src => "assets/icon-show.png"}>/
+        %span 显示可见光
+      %button{:type => "button", :id => "show-bmp"}
+        %img{:alt => "", :src => "assets/icon-show.png"}>/
+        %span 隐藏基准图
+      %button{:type => "button", :id => "help-btn"}
+        %img{:alt => "", :src => "assets/icon-help.png"}>/
+        帮助
+    .manipulate-area.clearfix
+      #manipulate-canvas.manipulate-canvas
+      .manipulate-sider
+        .picture-evaluation
+          %h2.bg_gradient 图片评价
+          %ul
+            %li
+              %input{:type => "checkbox", :id => "evaluation-irp"}/
+              %label{:for => "evaluation-irp"} 不满意红外图
+            %li
+              %input{:type => "checkbox", :id => "evaluation-irm"}/
+              %label{:for => "evaluation-irm"} 不满意可见光
+            %li
+              %input{:type => "checkbox", :id => "evaluation-layout"}/
+              %label{:for => "evaluation-layout"} 不满意基准图
+        .manipulate-btn#manipulate-btn
+          %button#draw-point{:type => "button", :title => "画点"}
+            %img{:alt => "", :src => "assets/icon-point.png"}>/
+            点
+          %button#draw-line{:type => "button", :title => "画线"}
+            %img{:alt => "", :src => "assets/icon-line.png"}>/
+            直线
+          %button#draw-rect{:type => "button", :title => "画矩形"}
+            %img{:alt => "", :src => "assets/icon-rect.png"}>/
+            矩形
+          %button#draw-circle{:type => "button", :title => "画圆"}
+            %img{:alt => "", :src => "assets/icon-circle.png"}>/
+            圆
+          %button#delete-one{:type => "button", :title => "删除"}
+            %img{:alt => "", :src => "assets/icon-delete.png"}>/
+            删除
+          %button#delete-all{:type => "button", :title => "删除全部"}
+            %img{:alt => "", :src => "assets/icon-delete-all.png"}>/
+            删除所有
+    .analyse-rule
+      %h2.bg_gradient 制定诊断规则
+      %table
+        %thead
+          %tr
+            %td 序号
+            %td 缺陷
+            %td 判据
+            %td 判据详细描述
+            %td 分析条件
+        %tbody
+          %tr
+            %td{:rowspan => "5"}
+              5
+            %td{:rowspan => "5"}
+              危急
+            %td
+              %a{:href => ""} 增加
+            %td
+              %a{:href => ""} 增加
+            %td
+              %a{:href => ""} 增加
+          %tr
+            %td
+            %td
+            %td
+          %tr
+            %td
+            %td
+            %td
+          %tr
+            %td
+            %td
+            %td
+          %tr
+            %td
+            %td
+            %td
+          %tr
+            %td{:rowspan => "5"}
+              4
+            %td{:rowspan => "5"}
+              严重
+            %td
+              %a{:href => ""} 增加
+            %td
+              %a{:href => ""} 增加
+            %td
+              %a{:href => ""} 增加
+          %tr
+            %td
+            %td
+            %td
+          %tr
+            %td
+            %td
+            %td
+          %tr
+            %td
+            %td
+            %td
+          %tr
+            %td
+            %td
+            %td
+          %tr
+            %td{:rowspan => "5"}
+              3
+            %td{:rowspan => "5"}
+              一般
+            %td
+              %a{:href => ""} 增加
+            %td
+              %a{:href => ""} 增加
+            %td
+              %a{:href => ""} 增加
+          %tr
+            %td
+            %td
+            %td
+          %tr
+            %td
+            %td
+            %td
+          %tr
+            %td
+            %td
+            %td
+          %tr
+            %td
+            %td
+            %td
+          %tr
+            %td{:rowspan => "5"}
+              2
+            %td{:rowspan => "5"}
+              关注
+            %td
+              %a{:href => ""} 增加
+            %td
+              %a{:href => ""} 增加
+            %td
+              %a{:href => ""} 增加
+          %tr
+            %td
+            %td
+            %td
+          %tr
+            %td
+            %td
+            %td
+          %tr
+            %td
+            %td
+            %td
+          %tr
+            %td
+            %td
+            %td
+          %tr
+            %td{:rowspan => "5"}
+              1
+            %td{:rowspan => "5"}
+              正常
+            %td
+              %a{:href => ""} 增加
+            %td
+              %a{:href => ""} 增加
+            %td
+              %a{:href => ""} 增加
+          %tr
+            %td
+            %td
+            %td
+          %tr
+            %td
+            %td
+            %td
+          %tr
+            %td
+            %td
+            %td
+          %tr
+            %td
+            %td
+            %td

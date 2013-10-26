@@ -1,0 +1,24 @@
+!!!
+%html
+  %head
+    = stylesheet 'application'
+    = javascript 'application'
+    = render 'layouts/head'
+
+  %body{:style => "height:100%"}
+    #resolution_banner.resolution_banner
+      #resolution_banner_inner.resolution_banner_inner
+        %p 请使用高分辨率屏幕，获得更好的浏览体验！
+    - nav_menu = 'home_nav_menu'
+    = render 'layouts/navbar', :nav_menu => nav_menu
+
+    .container
+      #content-container.span12
+        .notice
+          = notice
+        .alert{ :style => "display:none;" }
+          = alert
+        .main-content
+    = yield
+
+    = render 'layouts/foot'

@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    = render 'layouts/head'
+
+  %body{:style => "height:100%"}
+    - nav_menu = 'home_nav_menu'
+    = render 'layouts/navbar', :nav_menu => nav_menu
+
+    .container
+      #content-container.span10.content.thumbnails
+        - flash.each do |key, msg|
+          = content_tag :div, msg, :class => "#{key}"
+        .main-content
+          = yield
+
+    = render 'layouts/foot'
+

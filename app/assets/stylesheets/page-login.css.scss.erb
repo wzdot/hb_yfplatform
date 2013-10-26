@@ -1,0 +1,133 @@
+body { 
+  background:#499996;
+  width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+  font-family:'微软雅黑','microsoft yahei','Apple LiGothic Medium','SimHei',Arial, Helvetica, sans-serif;
+  font-size:12px;
+}
+.bg_login {
+  background:url( <%= asset_path( 'bg_login.jpg' ) %> ) no-repeat scroll 0 0;
+  position:relative;
+  width:1024px;
+  height:700px;
+  margin:0 auto;
+  padding:0;
+}
+
+.login_box {
+  background:#1a817e;
+  position:relative;
+  width:550px;
+  margin:0 auto;  
+  top:150px;  
+  padding:20px 40px 30px 40px;
+}
+
+.login_box .login_head {
+  position:relative;
+  margin:20px 0 10px 0;
+  text-align:center;
+  font-family:inherit;
+  font-size:30px;
+  font-weight:bold;
+  color:#ffffff;  
+}
+
+.login_box form {
+  background:#499996;
+  text-align:center;
+  padding:0;
+  margin:0;
+}
+.login_box form p{
+  padding:0;
+  margin:12px;
+  position:relative;
+}
+.login_box form .login_title{
+  margin:0;
+  padding:20px 0 0 0;
+  font-family:inherit;
+  font-size:20px;
+  color:#ffffff;
+  text-align:center;
+  font-weight:bold;
+}
+
+.login_box form label,.login_box form input,.login_box form span{
+  margin:0;
+  padding:0;
+  width:100px;
+  height:20px;
+  line-height:20px;
+}
+.login_box form label{ 
+  font-size:14px;
+  font-family:inherit;
+}
+.login_box form input{
+  width:170px;
+}
+.login_box form span{
+  font-size:12px;
+  font-family:inherit;
+  position:absolute;
+  top:5px;
+}
+.login_box p label.label_password span{
+  padding-right:28px;
+  font-size:14px;
+  font-family:inherit;
+  position:relative;
+  top:0;
+}
+.login_box form input#user_smscode,.login_box form input#user_captcha{
+  width:46px;
+}
+.login_box form input#btn_ask_sms,.login_box form #captcha{
+  width:120px;  
+  height:27px;
+  line-height:20px;
+  vertical-align:top;
+  font-size:12px;
+  font-family:inherit;
+}
+.login_box form p.line_checkbox{
+  margin-left:80px;
+}
+.login_box form input#login_checkbox{
+  width:15px;
+  height:15px;
+}
+.login_box form input.btn-large{
+  width:80px;
+  height:30px;
+  margin:0 15px 20px 0;
+  font-size:12px;
+  font-family:inherit;
+}
+.login_box form label.login_checkbox{
+  margin:0 10px 0 0;
+  font-size:12px;
+  font-family:inherit;
+}
+.login_box form p.smscode_box,.login_box form p.captcha_box{
+  margin-left:15px;
+}
+.login_box form p.line_submit{
+  margin-left:100px;
+}
+.alert{
+  width:1200px;
+  margin:0 auto;
+  height:25px;
+  line-height:25px;
+  background:#fcf8e3;
+  text-align:center;
+  color:#C09853;
+  font-size:12px;
+  font-family:inherit;
+}
+hr{display:none;}

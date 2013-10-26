@@ -1,0 +1,75 @@
+
+.row-fluid
+  .span3.regions
+    %h3.bg_gradient
+      = t( "app.regions" )
+    .well.sidebar-nav
+      %ul#regions_tree.ztree
+
+  .span4.shoot_sequences
+    %h3.bg_gradient
+      = t( "app.shoot_sequence" )
+    .well.sidebar-nav
+      %ul#shoot_sequences_tree.ztree
+      %br
+      .some_btns
+        %button#btn_save_shoot_sequence.btn{ :OnClick => "return false;", :disabled => "true" }
+          = t( "保存" )
+        = link_to t( "导出顺序包" ), "#", :id => "btn_download_task_pkg", :class => "btn-large"
+
+  .span5
+    #device_areas_to_select
+      %h4.bg_gradient
+        = t( "app.device_areas_to_select" )
+      %a.toggle_btn{ :title => "收起"} 
+      .well.sidebar-nav
+        %ul#device_areas_to_select_tree.ztree{ :style => "overflow: auto;" }
+        %br
+        %button#btn_move_all_device_areas_to_shoot_sequence.btn{ :OnClick => "return false;" } &lt;&lt;
+
+    #devices_to_select
+      %h4.bg_gradient
+        = t( "app.devices_to_select" )
+      %a.toggle_btn{ :title => "收起"} 
+      .well.sidebar-nav
+        %ul#devices_to_select_tree.ztree{ :style => "overflow: auto;" }
+        %br
+        %button#btn_move_all_devices_to_shoot_sequence.btn{ :OnClick => "return false;" } &lt;&lt;
+
+    #device_part_positions_to_select
+      %h4.bg_gradient 待选择设备角度
+      %a.toggle_btn{ :title => "收起"} 
+      .well.sidebar-nav
+        %ul#device_part_positions_to_select_tree.ztree{ :style => "overflow: auto;" }
+        %br
+        %button#btn_move_all_part_positions_to_shoot_sequence.btn{ :OnClick => "return false;" } &lt;&lt;
+    
+
+    #rMenu
+      %ul
+        %li#m_add{:onclick => "addTreeNode();"} 增加拍摄顺序
+        %li#m_edit{:onclick => "edit();"} 重命名
+        %li#m_del{:onclick => "removeTreeNode();"} 删除
+        %li#m_reset{:onclick => "hideRMenu();"} 关闭菜单
+        
+
+:javascript
+  //当前选择的拍摄顺序的id
+  function get_cur_shoot_sequence_id() {
+    var obj_regions_tree = $.fn.zTree.getZTreeObj( "regions_tree" );
+    if( obj_regions_tree ) {
+      var nodes = obj_regions_tree.getSelectedNodes();
+      if( nodes.length > 0 ) {
+        var cur_node = nodes[ 0 ];
+        return cur_node.id;
+      }
+    }
+
+    return -1;
+  }
+
+= javascript_last "define_dashboard"
+
+
+  
+

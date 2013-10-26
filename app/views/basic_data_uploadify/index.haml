@@ -1,0 +1,38 @@
+= stylesheet "application"
+= javascript "application"
+= stylesheet_last "referenced-uploadify", "page-basic_data_uploadify"
+= javascript_last "jquery.uploadify-3.1.min", "basic_data_uploadify"
+
+<br/>
+.file_upload_area.clearfix
+  .file_upload_area_r
+    %input#file_upload_path{:disabled => "disabled", :name => "file_upload_path", :type => "text"}/
+  .file_upload_area_l
+    %input#file_upload{:name => "file_upload", :type => "file"}/
+
+.select_area.clearfix
+  .select_area_l
+    %p.bg_gradient.select_title Execl 表数据
+    %select#column_one{:size => "22"}
+
+  .select_area_m
+    %p.bg_gradient.select_title 实际数据   《————————》   标准数据
+    %select#column_two{:size => "19"}
+    .add_del_btn
+      %button#add_btn.btn{:disabled => "disabled"} 增加关系
+      %button#del_btn.btn{:disabled => "disabled"} 删除关系
+  .select_area_r
+    %p.bg_gradient.select_title 标准数据
+    = select :options, :index, @options.each_with_index.map{|name, index| [name, index]}, {}, { :size => 22 , :id => 'column_three'}
+.progress_box
+
+.progress_container.progress.progress-success
+  .progress_bar.bar
+  %span.progress_value 
+
+.upload_group
+  %button.upload_btn.btn{:disabled => "disabled"} 开始导入
+  %input.filename.btn{:type => "hidden"}/  
+
+
+

@@ -1,0 +1,29 @@
+= stylesheet "application"
+= stylesheet "page-admin"
+= javascript "application"
+= javascript_last "reset"
+
+%h2 重置密码
+.get_password_p
+  .div_nav.first_nav 1. 输入邮箱地址
+  .div_nav ————>
+  .div_nav.active_nav 2. 重置密码
+  .div_nav ————>
+  .div_nav 3. 完成
+= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }, :remote => true) do |f|
+  = f.error_notification
+  = f.input :reset_password_token, :as => :hidden
+  = f.full_error :reset_password_token
+  .inputs
+    = f.input :password, :label => "新密码", :required => true
+    %span.warn_message.position_one 密码长度必须大于等于6位
+    %br
+    = f.input :password_confirmation, :label => "再次输入", :required => true
+    %span.warn_message.position_two 请再次输入密码
+    %br
+    - if User.use_sms_code?
+      = f.input :password_sms_code, :label => "短信认证码", :required => true
+      %span.warn_message.position_three 请输入认证码
+      %br
+  .actions
+    = f.button :submit, "提交"

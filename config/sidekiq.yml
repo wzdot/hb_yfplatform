@@ -1,0 +1,5 @@
+:concurrency: 25
+:queues:
+  - [basic_data, 10]
+  - [shoot_data, 5]
+  - [redo_task, 5]

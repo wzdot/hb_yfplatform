@@ -1,0 +1,103 @@
+= stylesheet "application"
+= stylesheet_last "page-special", "referenced-uploadify"
+= javascript "application"
+= javascript_last "jquery.uploadify-3.1.min", "page-special"
+
+%h2.bg_gradient 单条数据录入表单
+= form_tag({:action => :create}, {:id => 'special_data_form', :class => 'special_data_form', :remote => true}) do
+	#special_data_items.special_data_items.clearfix
+		#oauth_picture.oauth_picture.clearfix
+			#oauth_irimage.oauth_irimage
+				%img#irimage_load.irimage_load{:src => "/assets/image_load.gif"}/
+				%img#irimage_list.irimage_list{:src => "/assets/display-picture.png"}/
+				%input#irimage.irimage{:type => "file", :name => "irimage" }
+			#oauth_viimage.oauth_viimage
+				%img#viimage_load.viimage_load{:src => "/assets/image_load.gif"}/
+				%img#viimage_list.viimage_list{:src => "/assets/display-picture.png"}/
+				%input#viimage.viimage{:type => "file", :name => "viimage" }
+		#items_list.items_list
+			%ul.items_list_left#station_level.station_level
+				%li
+					%h2.bg_gradient 第一步
+				= select_tag 'region_company', options_for_select([[@company.name, @company.id]]), :id => 'region_company', :name => nil, :disabled => true
+				= select_tag 'line_id', options_for_select([[@line.name, @line.id]]), :name => 'line_id', :disabled => true
+				= select_tag 'substation_voltage_id', options_for_select([[@substation_voltage.name, @substation_voltage.id]]), :name => 'substation_voltage_id', :disabled => true
+				= select_tag 'substation_id', options_for_select([[@substation.name, @substation.id]]), :name => 'substation_id', :disabled => true
+				= select_tag 'device_area_voltage_id', options_for_select([[@device_area_voltage.name, @device_area_voltage.id]]), :name => 'device_area_voltage_id', :disabled => true
+				= select_tag 'device_area_id', options_for_select([[@device_area.device_area_name, @device_area.id]]), :name => 'device_area_id', :disabled => true
+				= select_tag 'device_type_id', options_for_select([[@device_type.name, @device_type.id]]), :name => 'device_type_id', :disabled => true
+				= select_tag 'model_style_id', options_for_select([[@model_style.name, @model_style.id]]), :name => 'model_style_id', :disabled => true
+				= select_tag 'device_id', options_for_select([[@device.local_scene_name, @device.id]]), :name => 'device_id', :disabled => true
+				= select_tag 'part_position_id', options_for_select([[@part_position.name, @part_position.id]]), :name => 'part_position_id', :disabled => true
+			%ul.items_list_middle
+				%li
+					%h2.bg_gradient 第二步
+				%li
+					%span.required *
+					%label{:for => "detect_date"} 拍摄日期
+					%input#detect_date{:type => "text", :name => 'detect_date'}/
+					%span.warn_message.detect_date_span 加 <em>* </em>必填
+				%li
+					%span.required *
+					%label{:for => "detect_time_h"} 拍摄时间
+					%input#detect_time.detect_time{:type => "text", :name => 'detect_time'}/
+					%span.warn_message.detect_time_span 格式 hh:mm:ss
+				%li
+					%label{:for => "radiation_rate"} 辐射率
+					%input#radiation_rate.int_float{:type => "text", :name => 'radiance'}/
+					%span.warn_message.warn_radiation_rate 格式错误！
+				%li
+					%label{:for => "distance"} 距离
+					%input#distance.int_float{:type => "text", :name => 'distance'}/
+					%span.warn_message.warn_distance 格式错误！
+				%li
+					%label{:for => "temperature"} 环境温度
+					%input#temperature.int_float{:type => "text", :name => 'temperature'}/
+					%span.warn_message.warn_temperature 格式错误！
+				%li
+					%label{:for => "humidity"} 相对湿度
+					%input#humidity.int_float{:type => "text", :name => 'humidity'}/
+					%span.warn_message.warn_humidity 格式错误！	
+				%li.temperature
+					%span.shape_span
+						%select.shape_select
+							%option{:selected => "selected", :value => "R"} R(矩形)
+							%option{:value => "P"} P(点)
+							%option{:value => "L"} L(线)
+							%option{:value => "E"} E(圆)
+						%select.index_select
+							%option{:selected => "selected", :value => "01"} 01
+							%option{:value => "02"} 02
+							%option{:value => "03"} 03
+							%option{:value => "04"} 04
+							%option{:value => "05"} 05
+							%option{:value => "06"} 06
+							%option{:value => "07"} 07
+							%option{:value => "08"} 08
+							%option{:value => "09"} 09
+							%option{:value => "10"} 10
+						最高温度（℃）
+					%input.temperature.int_float{:type => "text"}
+					%span.add_line
+						%img.add_img{:src => "/assets/add.jpg", :title => "新增"}/
+						%img.delete_img{:src => "/assets/delete.jpg" , :title => "删除"}/
+					%span.warn_message.warn_s01_highest_temperature 格式错误！
+				
+			%ul.items_list_right
+				%li
+					%h2.bg_gradient
+				%li
+					%label{:for => "work_voltage"} 运行电压
+					%input#work_voltage.int_float{:type => "text", :name => 'running_voltage'}/
+					%span.warn_message.warn_work_voltage 格式错误！
+				%li
+					%label{:for => "load_current"} 负荷电流
+					%input#load_current.int_float{:type => "text", :name => 'electrical_current'}/
+					%span.warn_message.warn_load_current 格式错误！		
+				
+				
+
+	#submit_cancel.submit_cancel.clearfix
+		%input#submit_btn.submit_btn{:type => "button", :value => "提交"}/ 
+		%input#cancel_btn.cancel_btn{:type => "reset", :value => "清空"}/  
+

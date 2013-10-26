@@ -1,0 +1,102 @@
+:javascript
+  //初始化拍摄顺序
+  var shoot_sequences_tree_setting = {
+    async: {
+      enable: true,
+      url: get_url_for_shoot_sequences_tree,
+      type: "get",
+      autoParam: [ "id", "name", "level" ],
+      otherParam:{ "otherParam" : "shoot_sequences_tree" }
+    },
+    edit: {
+      enable: true,
+      showRemoveBtn: true,
+      showRenameBtn: false
+    },
+    view: {
+      selectedMulti: false,
+      expandSpeed: ""
+    },
+
+    callback: {
+      //beforeExpand: beforeExpand,
+      //onAsyncSuccess: onAsyncSuccess,
+      //onAsyncError: onAsyncError,
+      //beforeDrag: beforeDrag,
+      beforeDrop: before_drop_to_shoot_sequences_tree,
+      onDrop:     on_shoot_sequences_drop,
+      onRemove:   on_remove_shoot_sequence,
+      onClick: onSequencesTreeClick
+    }
+  };
+
+  function get_url_for_shoot_sequences_tree( treeId, treeNode ) {
+    var level = treeNode ? treeNode.level : -1;
+    var param;
+
+    //首层显示设备区
+    if( level < 0 ) {
+      param = get_cur_shoot_sequence_id();
+      return "/task/shoot_sequences/" + param + "/get_device_areas.json?level=" + level;
+    } else {
+      param = treeNode ? treeNode.id : 0;
+
+      return "/task/device_area_shoot_sequences/" + param + "/get_device_shoot_sequences.json?level=" + level;
+    }
+  }
+
+  function on_remove_shoot_sequence( event, treeId, treeNode ) {
+    $( "#btn_save_shoot_sequence" ).attr( "disabled", false );
+  }
+
+  function beforeDrag( treeId, treeNodes ) {
+    for (var i=0,l = treeNodes.length; i<l; i++) {
+      if( treeNodes[ i ].drag == false ) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function before_drop_to_shoot_sequences_tree(treeId, treeNodes, targetNode, moveType) {
+    var b = targetNode ? targetNode.drop != false : true;
+    if( !b ) { return false; }    
+
+    if( treeId == "shoot_sequences_tree" ) {
+      if( treeNodes.length == 0 ) { return false; }
+      var src_node_type = treeNodes[ 0 ].node_type;
+
+      if( moveType == "inner" ) {
+        if( targetNode ) {
+          return ( targetNode.node_type == "device_area" && src_node_type == "device" );
+        } else {
+          return ( src_node_type == "device_area" );
+        }
+      } else {
+        return ( ( !targetNode && src_node_type == "device_area" ) || ( targetNode.node_type == src_node_type ) );
+      }
+    }
+  }
+
+  function on_shoot_sequences_drop( event, treeId, treeNodes, targetNode, moveType ) {
+    //alert( "onDrop treeId " + treeId );
+    if( treeId == "shoot_sequences_tree" ) {
+      //alert( "dropped" );
+      for( var i=0; i < treeNodes.length; i++ ) {
+        a_node = treeNodes[ i ];
+        if( a_node.node_type == "device_area" && a_node.isParent == false ) {
+          a_node.isParent = true;
+        }
+      }
+
+      $( "#btn_save_shoot_sequence" ).attr( "disabled", false );
+    }
+  }
+
+  function onSequencesTreeClick( event, treeId, treeNode, clickFlag ) {
+    //更新待选择设备
+    //alert( "onSequencesTreeClick" );
+
+    var obj_devices_to_select = $.fn.zTree.getZTreeObj( "devices_to_select_tree" );
+    obj_devices_to_select.reAsyncChildNodes( null, "refresh", false );
+  }
