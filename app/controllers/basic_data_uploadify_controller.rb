@@ -15,6 +15,7 @@ class BasicDataUploadifyController < ApplicationController
 		suffix = stream.original_filename.end_with?('xls') ? 'xls' : 'xlsx'
 		filename = "#{SecureRandom.hex}.#{suffix}"
 		src = stream.tempfile.path
+		FileUtils.mkdir_p( Rails.configuration.uploadify_tmp_dir )
 		dst = "#{Rails.configuration.uploadify_tmp_dir}/#{filename}"
 		FileUtils.mv(src, dst)
 		if suffix == 'xls'

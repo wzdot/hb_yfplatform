@@ -8,7 +8,7 @@ $ ->
     cookie_name = document.cookie
     if cookie_name isnt "" and cookie_name isnt null
       return unescape(cookie_name)
-    else 
+    else
       return null
   checkCookie = ->
     resolution_banner = getCookie()
@@ -20,11 +20,11 @@ $ ->
       screen_width =  window.screen.width;
       if screen_width < 1280
         $("#resolution_banner").slideDown(500)
-        setTimeout('$("#resolution_banner").slideUp(600)',4000)     
+        setTimeout('$("#resolution_banner").slideUp(600)',4000)
 
-  checkCookie()        
+  checkCookie()
 
-  compare_current_phase_id = null 
+  compare_current_phase_id = null
   compare_ajax_flag = true
   current_phase =  true
   last_id = null
@@ -33,7 +33,7 @@ $ ->
   $("#begin_date").datepicker()
   $("#end_date").datepicker()
 
-  
+
 
 
   # 点击图片放大
@@ -73,7 +73,7 @@ $ ->
       strSrc = $(this)[0].src
       $(".picturebox").show 500
       $(".picturebox > img")[0].src = strSrc
-      $("#layer").show() 
+      $("#layer").show()
       $(".styled-select").hide()
       $(".areas_select").hide()
 
@@ -85,7 +85,7 @@ $ ->
       strSrc = $(this)[0].src
       $(".picturebox").show 500
       $(".picturebox > img")[0].src = strSrc
-      $("#layer").show() 
+      $("#layer").show()
       $(".styled-select").hide()
       $(".areas_select").hide()
 
@@ -103,7 +103,7 @@ $ ->
     $(".phaseAA")[1].innerHTML = ""
     $(".phaseAA")[2].innerHTML = ""
     $("#next_pic").attr({"disabled":true})
-    $("#prev_pic").attr({"disabled":true}) 
+    $("#prev_pic").attr({"disabled":true})
     $("#load_gif").hide()
     $("#item_current p")[0].innerHTML = ""
     $("#item_current img")[0].src = "/assets/display-picture.png"
@@ -127,17 +127,17 @@ $ ->
           $("#next_pic").attr({"disabled":true})
           $slide_content = $("#details_history_items")
           slide_content_left = $slide_content.css({"left":400})
-          current_title = "#{result.current_device.phasic} #{result.current_device.full_time}"
+          current_title = "#{result.current_device.phasic} #{result.current_device.full_time} #{result.current_device.fault_nature}"
           current_src =  result.current_device.irimage
           current_td = result.current_device.params_json
           current_table_thead = "<thead><tr><td title='类型'>类型</td><td title='值'>值</td></tr></thead>"
           $(current_table_thead).appendTo("#item_current table")
-          $("<tbody></tbody>").appendTo("#item_current table") 
+          $("<tbody></tbody>").appendTo("#item_current table")
           $("#item_current p").text(current_title)
           $("#item_current img")[0].src = current_src
           for key, value of current_td
-            current_table_tbody =  "<tr><td title='#{key}'>#{key}</td><td title='#{value}'>#{value}</td></tr>" 
-            $(current_table_tbody).appendTo("#item_current table tbody") 
+            current_table_tbody =  "<tr><td title='#{key}'>#{key}</td><td title='#{value}'>#{value}</td></tr>"
+            $(current_table_tbody).appendTo("#item_current table tbody")
           history_items = result.same_device_box
           history_items_length = history_items.length
           if history_items_length < 3
@@ -147,22 +147,22 @@ $ ->
             $("#prev_pic").attr({"disabled":true})
             $("#next_pic").attr({"disabled":false})
             compare_ajax_flag = false
-          else 
+          else
             $("#prev_pic").attr({"disabled":true})
             $("#next_pic").attr({"disabled":false})
             compare_ajax_flag = true
           if history_items_length > 0
             $("#no_history_items").hide()
             for item,index in history_items
-              history_str = "<li><p>#{item.phasic} #{item.full_time}</p><img src=#{item.irimage} onerror=\"this.src='/assets/display-picture-error.png'\" height = '225' width = '300'/></li>"
+              history_str = "<li><p>#{item.phasic} #{item.full_time} #{item.fault_nature}</p><img src=#{item.irimage} onerror=\"this.src='/assets/display-picture-error.png'\" height = '225' width = '300'/></li>"
               $(history_str).appendTo("#items_history")
               history_table_thead = "<table><thead><tr><td title='类型'>类型</td><td title='值'>值</td></tr></thead><tbody></tbody></table>"
               $(history_table_thead).appendTo("#items_history li:eq(#{index})")
               for history_key, history_value of item.params_json
-                history_table_tbody =  "<tr><td title='#{history_key}'>#{history_key}</td><td title='#{history_value}'>#{history_value}</td></tr>" 
+                history_table_tbody =  "<tr><td title='#{history_key}'>#{history_key}</td><td title='#{history_value}'>#{history_value}</td></tr>"
                 $(history_table_tbody).appendTo("#items_history li:eq(#{index}) table tbody")
           else
-            $("#no_history_items").show()      
+            $("#no_history_items").show()
           $("#load_gif").hide()
 
   # 相别对比
@@ -180,7 +180,7 @@ $ ->
     $("#prev_next").show()
     $("#details_history").show()
     history_compare()
-    
+
   # 键盘左右键
   $(document).keyup (event) ->
     if event.keyCode is 37
@@ -191,20 +191,20 @@ $ ->
         if slide_content_left is -400
           $("#prev_pic").attr({"disabled":true})
           $slide_content.animate({ left : '+='+800 }, "slow")
-          $("#next_pic").attr({"disabled":false})         
+          $("#next_pic").attr({"disabled":false})
         else if slide_content_left is 400
           $("#next_pic").attr({"disabled":false})
           $("#prev_pic").attr({"disabled":true})
         else
           $("#next_pic").attr({"disabled":false})
           $("#prev_pic").attr({"disabled":false})
-          $slide_content.animate({ left : '+='+800 }, "slow") 
-      
+          $slide_content.animate({ left : '+='+800 }, "slow")
+
     else if event.keyCode is 39
       $slide_content = $("#details_history_items")
       slide_content_left = $slide_content.css("left")
       slide_content_left = parseInt slide_content_left
-      slide_content_left = -slide_content_left 
+      slide_content_left = -slide_content_left
       li_length = $slide_content.find("ul li").length
       li_length = Math.ceil(li_length / 2)
       li_width = li_length * 800
@@ -222,26 +222,26 @@ $ ->
             if history_items_length > 0
               for item,index in history_items
                 index = index + page_num*3 - 1
-                history_str = "<li><p>#{item.phasic} #{item.full_time}</p><img src=#{item.irimage} onerror=\"this.src='/assets/display-picture-error.png'\" height = '225' width = '300'/></li>"
+                history_str = "<li><p>#{item.phasic} #{item.full_time} #{item.fault_nature}</p><img src=#{item.irimage} onerror=\"this.src='/assets/display-picture-error.png'\" height = '225' width = '300'/></li>"
                 $(history_str).appendTo("#items_history")
                 history_table_thead = "<table><thead><tr><td title='类型'>类型</td><td title='值'>值</td></tr></thead><tbody></tbody></table>"
                 $(history_table_thead).appendTo("#items_history li:eq(#{index})")
                 for history_key, history_value of item.params_json
-                  history_table_tbody =  "<tr><td title='#{history_key}'>#{history_key}</td><td title='#{history_value}'>#{history_value}</td></tr>" 
+                  history_table_tbody =  "<tr><td title='#{history_key}'>#{history_key}</td><td title='#{history_value}'>#{history_value}</td></tr>"
                   $(history_table_tbody).appendTo("#items_history li:eq(#{index}) table tbody")
-      
+
       if not $slide_content.is(":animated")
         if slide_content_left is li_width-2000
           $slide_content.animate({ left : '-='+800 }, "slow")
-          $("#next_pic").attr({"disabled":true}) 
+          $("#next_pic").attr({"disabled":true})
           $("#prev_pic").attr({"disabled":false})
         else if slide_content_left > li_width-1600
-          $("#next_pic").attr({"disabled":true}) 
+          $("#next_pic").attr({"disabled":true})
           $("#prev_pic").attr({"disabled":false})
         else
           $slide_content.animate({ left : '-='+800 }, "slow")
           $("#next_pic").attr({"disabled":false})
-          $("#prev_pic").attr({"disabled":false}) 
+          $("#prev_pic").attr({"disabled":false})
 
 
   #鼠标点击事件
@@ -257,13 +257,13 @@ $ ->
       else
         $slide_content.animate({ left : '+='+800 }, "slow")
         $("#next_pic").attr({"disabled":false})
-        $("#prev_pic").attr({"disabled":true}) 
+        $("#prev_pic").attr({"disabled":true})
 
   $("#next_pic").click ->
     $slide_content = $("#details_history_items")
     slide_content_left = $slide_content.css("left")
     slide_content_left = parseInt slide_content_left
-    slide_content_left = -slide_content_left 
+    slide_content_left = -slide_content_left
     li_length = $slide_content.find("ul li").length
     li_length = Math.ceil(li_length / 2)
     li_width = li_length * 800
@@ -281,22 +281,22 @@ $ ->
           if history_items_length > 0
             for item,index in history_items
               index = 2*page_num + 1 + index
-              history_str = "<li><p>#{item.phasic}  #{item.full_time}</p><img src=#{item.irimage} onerror=\"this.src='/assets/display-picture-error.png'\" height = '225' width = '300'/></li>"
+              history_str = "<li><p>#{item.phasic} #{item.full_time} #{item.fault_nature}</p><img src=#{item.irimage} onerror=\"this.src='/assets/display-picture-error.png'\" height = '225' width = '300'/></li>"
               $(history_str).appendTo("#items_history")
               history_table_thead = "<table><thead><tr><td title='类型'>类型</td><td title='值'>值</td></tr></thead><tbody></tbody></table>"
               $(history_table_thead).appendTo("#items_history li:eq(#{index})")
               for history_key, history_value of item.params_json
-                history_table_tbody =  "<tr><td title='#{history_key}'>#{history_key}</td><td title='#{history_value}'>#{history_value}</td></tr>" 
+                history_table_tbody =  "<tr><td title='#{history_key}'>#{history_key}</td><td title='#{history_value}'>#{history_value}</td></tr>"
                 $(history_table_tbody).appendTo("#items_history li:eq(#{index}) table tbody")
     if not $slide_content.is(":animated")
       if slide_content_left < li_width-2000
         $slide_content.animate({ left : '-='+800 }, "slow")
         $("#next_pic").attr({"disabled":false})
         $("#prev_pic").attr({"disabled":false})
-      else  
-        $("#next_pic").attr({"disabled":true}) 
+      else
+        $("#next_pic").attr({"disabled":true})
         $slide_content.animate({ left : '-='+800 }, "slow")
-        $("#prev_pic").attr({"disabled":false}) 
+        $("#prev_pic").attr({"disabled":false})
 
   # 变输配选择
   $("#zone").change ->
@@ -310,7 +310,7 @@ $ ->
       $("#jqgh_list1_substation_name").text("线路名称")
       $("#jqgh_list1_device_area_name").text("杆塔号")
       $("#jqgh_list1_device_type_name").text("部件类型")
-      $("#jqgh_list1_local_scene_name").text("方向") 
+      $("#jqgh_list1_local_scene_name").text("方向")
     else
       $("#jqgh_list1_substation_name").text("变电站(线路名称)")
       $("#jqgh_list1_device_area_name").text("间隔单元(杆塔号)")
@@ -369,7 +369,7 @@ $ ->
   # 显示所有按钮点击
   $("#btn_reset").click (e) ->
     if jQuery("#zone").length > 0
-      $('#zone').get(0).selectedIndex = 0  
+      $('#zone').get(0).selectedIndex = 0
     $('#query_voltage_level').get(0).selectedIndex = 0
     $('#query_device_type').get(0).selectedIndex = 0
     if $("#areas_select").length > 0
@@ -402,13 +402,13 @@ $ ->
       checkbox[y].checked = false
       y++
 
-  
+
   # zTree初始化
   $.ajax
     url: "/composite/detections/role_tree.json"
     type: "get"
     success: (data) ->
-      cfg = 
+      cfg =
         data:
           key:
             title: 'caption'
@@ -443,9 +443,9 @@ $ ->
     level = treeNode.lv
     if level is 1
       $(".zone").show()
-      $('#zone').get(0).selectedIndex = 0 
+      $('#zone').get(0).selectedIndex = 0
     else
-      $('#zone').get(0).selectedIndex = 0 
+      $('#zone').get(0).selectedIndex = 0
       $(".zone").hide()
     select_id = treeNode.id
     select_parent_id = treeNode.parent_id
@@ -459,8 +459,8 @@ $ ->
         option_str = ""
         if data.device_type_list.length > 0
           for item in data.device_type_list
-            option_str += "<option value='#{item.id}'>#{item.name}</option>"   
-          $(option_str).appendTo("#query_device_type")    
+            option_str += "<option value='#{item.id}'>#{item.name}</option>"
+          $(option_str).appendTo("#query_device_type")
         if data.data.length > 0
           jQuery("#list1").jqGrid "setSelection", data.data[0].id
         else
@@ -486,17 +486,17 @@ $ ->
             $("#jqgh_list1_local_scene_name").text("方向")
         if user_level == 5
           areas_label_name = ""
-          if line_no == 1  
-            areas_label_name = "间隔单元："   
+          if line_no == 1
+            areas_label_name = "间隔单元："
           else
             areas_label_name = "杆塔号："
           areas_select = "<div class='areas_select'><label for='areas_select'>" + areas_label_name + "</label><select id='areas_select'><option value=''>-请选择-</option>"
           for item in data.areas
-            areas_select += "<option value='" + item[0] + "'>" + item[1] + "</option>" 
+            areas_select += "<option value='" + item[0] + "'>" + item[1] + "</option>"
           areas_select += "</select></div>"
           $(areas_select).insertAfter("#device_type")
     ).trigger "reloadGrid"
-    
+
 
 
   # 各个缺陷数量显示
@@ -595,7 +595,7 @@ $ ->
   #             else
   #               alert '删除失败'
   #       else
-  #         return 
+  #         return
   #     edit_data: ->
   #       rowid = $('#list1').jqGrid('getGridParam', 'selrow')
   #       location.href = "/special/#{rowid}/edit"
@@ -613,14 +613,14 @@ $ ->
   #     else
   #       false
   #   itemStyle:
-  #     color: '#000', 
-  #     backgroundColor: '#ffffff',   
+  #     color: '#000',
+  #     backgroundColor: '#ffffff',
   #     border: '1px solid #ccc'
   #   itemHoverStyle:
-  #     color: '#000', 
-  #     backgroundColor: '#fff085',   
+  #     color: '#000',
+  #     backgroundColor: '#fff085',
   #     cursor: 'pointer',
-  #     border: '1px solid #ccc'  
+  #     border: '1px solid #ccc'
   # $("#jqContextMenu").addClass("ui-widget ui-widget-content").css "font-size", "12px"
 
   # 格式化 list1
@@ -638,7 +638,7 @@ $ ->
     multiselect: false
     editurl: "/composite/detections.json"
     onPaging: (pgButton)->
-      $('div#jqContextMenu').hide().next("div").hide() 
+      $('div#jqContextMenu').hide().next("div").hide()
     loadComplete: (data) ->
       choose_templates(data.templates)
       statistics(data.fault_counts)
@@ -647,10 +647,10 @@ $ ->
       else
         init_data()
     onSelectRow: (id) ->
-    
+
       compare_current_phase_id = id
       current_phase = true
-      
+
       if id isnt last_id
         if not $("#details_history").is(":hidden")
           history_compare()
@@ -683,10 +683,10 @@ $ ->
                   tbody_str = "<tr><td title='#{value}'>#{value}</td><td title='#{key}'>#{key}</td></tr>"
                   $(tbody_str).appendTo(".details_pic table:eq(#{index}) tbody")
               if item.phasic isnt null
-                $(".phaseAA :eq(#{index})")[0].innerHTML = "#{item.phasic} #{item.full_time}"
+                $(".phaseAA :eq(#{index})")[0].innerHTML = "#{item.phasic} #{item.full_time} #{item.fault_nature_name}"
               if id.toString() is item.id.toString()
                 $(".phaseAA").css color: "black"
-                $(".phaseAA:eq(#{index})").css color: "#ec8f00" 
+                $(".phaseAA:eq(#{index})").css color: "#ec8f00"
 
       last_id = id
     jsonReader:
@@ -792,7 +792,7 @@ $ ->
       sortable: false
      ]
 
-  
+
 
 
 
@@ -887,7 +887,7 @@ $("#report_s").click (e)->
   if selectedId is null
     alert("未选中打印数据！")
     return
-  if confirm("确定使用 #{templet_name} 打印单页报告吗？")   
+  if confirm("确定使用 #{templet_name} 打印单页报告吗？")
     location.href = "/download/report/#{selectedId}/#{templet_id}"
   else
     return
@@ -901,7 +901,7 @@ $("#choose_templet li").live 'click', ->
   if selectedId is null
     alert("未选中打印数据！")
     return
-  if confirm("确定使用 #{templet_name} 打印单页报告吗？")    
+  if confirm("确定使用 #{templet_name} 打印单页报告吗？")
     location.href = "/download/report/#{selectedId}/#{templet_id}"
   else
     return

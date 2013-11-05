@@ -95,7 +95,7 @@ class Detection < ActiveRecord::Base
     .where("detections.id != #{id} AND detections.model_style_id=#{model_style_id} AND detections.device_area_id=#{device_area_id} AND detections.device_id = #{device_id} AND detections.part_position_id = #{part_position_id}")
     .joins('LEFT JOIN detection_resources ON detections.id = detection_resources.detection_id')
     .joins('LEFT JOIN devices ON detections.device_id = devices.id')
-    .select('detect_date, detect_time, detection_id, phasic AS device_phasic')
+    .select('detect_date, detect_time, detection_id, phasic AS device_phasic, fault_nature_id')
     .limit(limit)
     .offset(offset)
     .order('detect_date DESC, detect_time DESC')

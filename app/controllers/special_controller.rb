@@ -87,7 +87,7 @@ class SpecialController < ApplicationController
 		@line = Region.find_and_cache_by_id(@substation.region_id)
 		@company = Region.find_and_cache_by_id(@line.parent_id)
 		@substation_voltage = VoltageLevel.find_and_cache_by_id(@substation.voltage_level_id)
-		@device_area =  DeviceArea.find_and_cache_by_id(detection.device_area_id) 
+		@device_area =  DeviceArea.find_and_cache_by_id(detection.device_area_id)
 		@device_area_voltage = VoltageLevel.find_and_cache_by_id(@device_area.voltage_level_id)
 		@device_type = DeviceType.find_and_cache_by_id(detection.device_type_id)
 		@device = Device.find_and_cache_by_id(detection.device_id)
@@ -118,7 +118,7 @@ class SpecialController < ApplicationController
 	end
 
 	def device_area_voltages
-		voltages = VoltageLevel.select('id, name')
+		voltages = VoltageLevel.select('id, name').order('notes+0 ASC')
 		respond_to do |format|
 			format.json { render json: voltages }
   	end

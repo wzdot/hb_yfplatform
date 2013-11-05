@@ -139,10 +139,10 @@ class DetectionsController < ApplicationController
     if ( totalrecords % items_per_page ) > 0
       totalpages = totalpages + 1
     end
-    
+
     list_path = "config/list.yml"
 
-    jqdata = { 'totalpages' => totalpages, 'curpage' => curpage, 'totalrecords' => totalrecords, 'fault_counts' => fault_counts, 'data' => detections, 'areas' => areas, 'user_level' => level, 'templates' => YAML.load_file(list_path), 'device_type_list' => device_type_list} 
+    jqdata = { 'totalpages' => totalpages, 'curpage' => curpage, 'totalrecords' => totalrecords, 'fault_counts' => fault_counts, 'data' => detections, 'areas' => areas, 'user_level' => level, 'templates' => YAML.load_file(list_path), 'device_type_list' => device_type_list}
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: jqdata }
@@ -212,13 +212,13 @@ class DetectionsController < ApplicationController
         params_json = ''
         resource = DetectionResource.find_and_cache_by_detection_id(detection.id)
         params_json = Hash[*resource.params_json.gsub(/\[|\]|\"/, '').split(',')] unless resource.params_json.blank?
-        current_device = { "full_time" => detection.detect_full_time, "irimage" => (resource.irimage.nil?) ? "/ir-missing.jpg" : resource.irimage.url(:original), "params_json"=>params_json, :phasic => detection.device_phasic }
-        history_ids = detection.find_same_device_historiy_ids(offset, limit)        
+        current_device = { "full_time" => detection.detect_full_time, "irimage" => (resource.irimage.nil?) ? "/ir-missing.jpg" : resource.irimage.url(:original), "params_json"=>params_json, :phasic => detection.device_phasic, :fault_nature => detection.fault_nature.name }
+        history_ids = detection.find_same_device_historiy_ids(offset, limit)
         same_device_box = []
         history_ids.each do |h|
           resource = DetectionResource.find_and_cache_by_detection_id(h.detection_id)
           params_json = Hash[*resource.params_json.gsub(/\[|\]|\"/, '').split(',')] unless resource.params_json.blank?
-          same_device_box << { "full_time" => h.detect_full_time, "irimage" => (resource.irimage.nil?) ? "/ir-missing.jpg" : resource.irimage.url(:original), "params_json"=>params_json, :phasic => h.device_phasic}
+          same_device_box << { "full_time" => h.detect_full_time, "irimage" => (resource.irimage.nil?) ? "/ir-missing.jpg" : resource.irimage.url(:original), "params_json"=>params_json, :phasic => h.device_phasic, :fault_nature => h.fault_nature.name}
         end
         output_data = { "current_device" => current_device, "same_device_box" => same_device_box, 'description' => detection.item_title }
         render json: output_data
@@ -494,4 +494,4 @@ class DetectionsController < ApplicationController
     { line_no: self.line_no}
     # super((options || { }).merge({:line_no => [:line_no]}))
   end
-end 
+end
